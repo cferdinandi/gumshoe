@@ -1,5 +1,5 @@
 # Gumshoe [![Build Status](https://travis-ci.org/cferdinandi/gumshoe.svg)](https://travis-ci.org/cferdinandi/gumshoe)
-A simple, framework-agnostic scrollspy script.
+A simple, framework-agnostic scrollspy script. Gumshoe works great with [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll).
 
 [Download Gumshoe](https://github.com/cferdinandi/gumshoe/archive/master.zip) / [View the demo](http://cferdinandi.github.io/gumshoe/)
 
@@ -32,10 +32,19 @@ Gumshoe requires [classList.js](https://github.com/eligrey/classList.js), a poly
 ### 2. Add the markup to your HTML.
 
 ```html
-Markup here...
+<nav data-gumshoe-header>
+	<ul data-gumshoe>
+		<li class="active"><a class="active" href="#eenie">Eenie</a></li>
+		<li><a href="#meanie">Meanie</a></li>
+		<li><a href="#minnie">Minnie</a></li>
+		<li><a href="#moe">Moe</a></li>
+	</ul>
+</nav>
 ```
 
-Details.
+Add the `[data-gumshoe]` attribute to the navigation list that Gumshoe should watch.
+
+If you're using a fixed header, add the `[data-gumshoe-header]` attribute and Gumshoe will automatically offset it's calculations based on the header's height and distance from the top of the page.  If you have multiple fixed headers, add `[data-gumshoe-header]` to the last one in the markup.
 
 ### 3. Initialize Gumshoe.
 
@@ -76,8 +85,7 @@ Make sure these are installed first.
 2. Run `npm install` to install required files.
 3. When it's done installing, run one of the task runners to get going:
 	* `gulp` manually compiles files.
-	* `gulp watch` automatically compiles files when changes are made.
-	* `gulp reload` automatically compiles files and applies changes using [LiveReload](http://livereload.com/).
+	* `gulp watch` automatically compiles files and applies changes using [LiveReload](http://livereload.com/).
 
 
 
@@ -90,24 +98,30 @@ Gumshoe includes smart defaults and works right out of the box. But if you want 
 You can pass options and callbacks into Gumshoe through the `init()` function:
 
 ```javascript
-gumshoe.init();
+gumshoe.init({
+	offset: 0, // Distance in pixels to offset calculations
+	activeClass: 'active', // Class to apply to active navigation link and it's parent list item
+	callbackBefore: function (nav) {}, // Callback to before setting active link
+	callbackAfter: function (nav) {} // Callback to run after setting active link
+});
 ```
 
 ### Use Gumshoe events in your own scripts
 
 You can also call Gumshoe events in your own scripts.
 
-#### functionName()
-Description
+#### setDistances()
+Recalculate the height of document, the height of the fixed header, and how far navigation targets are from the top of the document.
 
 ```javascript
-// Functions here...
+gumshoe.setDistances();
 ```
 
-**Example**
+#### getCurrentNav()
+Determine which navigation element is currently active and add active classes.
 
 ```javascript
-// Example here...
+gumshoe.getCurrentNav();
 ```
 
 #### destroy()
@@ -141,5 +155,5 @@ Gumshoe is licensed under the [MIT License](http://gomakethings.com/mit/).
 
 Gumshoe uses [semantic versioning](http://semver.org/).
 
-* v0.0.1 - DATE
+* v1.0.0 - November 24, 2014
 	* Initial release.
