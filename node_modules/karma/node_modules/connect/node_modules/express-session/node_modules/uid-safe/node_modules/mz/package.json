@@ -1,0 +1,38 @@
+{
+  "name": "mz",
+  "description": "modernize node.js to current ECMAScript standards",
+  "version": "1.1.0",
+  "author": {
+    "name": "Jonathan Ong",
+    "email": "me@jongleberry.com",
+    "url": "http://jongleberry.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/normalize/mz"
+  },
+  "dependencies": {
+    "native-or-bluebird": "1"
+  },
+  "devDependencies": {
+    "istanbul": "0",
+    "bluebird": "2",
+    "mocha": "1"
+  },
+  "scripts": {
+    "test": "mocha --reporter spec",
+    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot",
+    "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter dot"
+  },
+  "readme": "\n# MZ - Modernize node.js\n\n[![NPM version][npm-image]][npm-url]\n[![Build status][travis-image]][travis-url]\n[![Test coverage][coveralls-image]][coveralls-url]\n[![Dependency Status][david-image]][david-url]\n[![License][license-image]][license-url]\n[![Downloads][downloads-image]][downloads-url]\n[![Gittip][gittip-image]][gittip-url]\n\nModernize node.js to current ECMAScript specifications!\nnode.js will not update their API to ES6+ [for a while](https://github.com/joyent/node/issues/7549).\nThis library is a wrapper for various aspects of node.js' API.\n\n## Installation and Usage\n\nSet `mz` as a dependency and install it.\n\n```bash\nnpm i mz\n```\n\nThen prefix the relevant `require()`s with `mz/`:\n\n```js\nvar fs = require('mz/fs')\n\nfs.exists(__filename).then(function (exists) {\n  if (exists) // do something\n})\n```\n\nPersonally, I use this with generator-based control flow libraries such as [co](https://github.com/visionmedia/co) so I don't need to use implementation-specific wrappers like [co-fs](https://github.com/visionmedia/co-fs).\n\n```js\nvar co = require('co')\nvar fs = require('mz/fs')\n\nco(function* () {\n  if (yield fs.exists(__filename)) // do something\n})()\n```\n\n## Promisification\n\nMany node methods are converted into promises.\nAny properties that are deprecated or aren't asynchronous will simply be proxied.\nThe modules wrapped are:\n\n- `child_process`\n- `crypto`\n- `dns`\n- `fs`\n- `zlib`\n\n```js\nvar exec = require('mz/child_process').exec\n\nexec('node --version').then(function (stdout) {\n  console.log(stdout)\n})\n```\n\n## Promise Engine\n\nIf you've installed [bluebird][bluebird],\n[bluebird][bluebird] will be used.\n`mz` does not install [bluebird][bluebird] for you.\n\nOtherwise, if you're using a node that has native v8 Promises (v0.11.13+),\nthen that will be used.\n\nOtherwise, this library will crash the process and exit,\nso you might as well install [bluebird][bluebird] as a dependency!\n\n## FAQ\n\n### Can I use this in production?\n\nIf you do, you should probably install [bluebird][bluebird] as\nnative v8 promises are still pretty raw.\n\n### Will this make my app faster?\n\nNope, probably slower actually.\n\n### Can I add more features?\n\nSure.\nOpen an issue.\n\nCurrently, the plans are to eventually support:\n\n- ECMAScript7 Streams\n\n[bluebird]: https://github.com/petkaantonov/bluebird\n\n[npm-image]: https://img.shields.io/npm/v/mz.svg?style=flat-square\n[npm-url]: https://npmjs.org/package/mz\n[github-tag]: http://img.shields.io/github/tag/normalize/mz.svg?style=flat-square\n[github-url]: https://github.com/normalize/mz/tags\n[travis-image]: https://img.shields.io/travis/normalize/mz.svg?style=flat-square\n[travis-url]: https://travis-ci.org/normalize/mz\n[coveralls-image]: https://img.shields.io/coveralls/normalize/mz.svg?style=flat-square\n[coveralls-url]: https://coveralls.io/r/normalize/mz?branch=master\n[david-image]: http://img.shields.io/david/normalize/mz.svg?style=flat-square\n[david-url]: https://david-dm.org/normalize/mz\n[license-image]: http://img.shields.io/npm/l/mz.svg?style=flat-square\n[license-url]: LICENSE.md\n[downloads-image]: http://img.shields.io/npm/dm/mz.svg?style=flat-square\n[downloads-url]: https://npmjs.org/package/mz\n[gittip-image]: https://img.shields.io/gittip/jonathanong.svg?style=flat-square\n[gittip-url]: https://www.gittip.com/jonathanong/\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/normalize/mz/issues"
+  },
+  "homepage": "https://github.com/normalize/mz",
+  "_id": "mz@1.1.0",
+  "_shasum": "fa63f08f20a1f6985cc1d9a33efa8db608cd6b9c",
+  "_from": "mz@1",
+  "_resolved": "https://registry.npmjs.org/mz/-/mz-1.1.0.tgz"
+}

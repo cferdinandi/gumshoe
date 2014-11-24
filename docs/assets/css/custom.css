@@ -1,0 +1,63 @@
+@-webkit-viewport { width: device-width; zoom: 1.0; }
+@-moz-viewport { width: device-width; zoom: 1.0; }
+@-ms-viewport { width: device-width; zoom: 1.0; }
+@-o-viewport { width: device-width; zoom: 1.0; }
+@viewport { width: device-width; zoom: 1.0; }
+
+html { overflow-y: auto; }
+
+img, audio, video, canvas {
+	max-width: 100%;
+	height: auto;
+}
+
+/**
+ * Offset fixed header
+ */
+body {
+	padding-top: 150px;
+}
+
+/*  Sets body width */
+.container {
+	max-width: 40em;
+	width: 88%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/**
+ * Create fixed header
+ */
+.fixed-header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: #f7f7f7;
+	width: 100%;
+}
+
+/**
+ * Display lists on a single line.
+ */
+.list-inline {
+	list-style: none;
+	margin-left: -0.5em;
+	margin-right: -0.5em;
+	padding: 0;
+}
+
+.list-inline li {
+	display: inline-block;
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+	padding: 0.25em 0.5em;
+}
+
+.list-inline li.active {
+	background-color: black;
+}
+
+.list-inline li.active a {
+	color: white;
+}

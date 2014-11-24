@@ -1,0 +1,21 @@
+{
+  "asi": true,
+  "boss": true,
+  "browser": true,
+  "node": true,
+  "expr": true,
+  "globals": {
+    "define": false,
+    "require": true,
+    "_t": true
+  },
+  "indent": 2,
+  "laxcomma": true,
+  "maxlen": 100,
+  "newcap": true,
+  "strict": false,
+  "trailing": true,
+  "undef": true,
+  "unused": true,
+  "quotmark": "single"
+}

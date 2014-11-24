@@ -1,0 +1,5 @@
+.lock-wscript
+*.swp
+build/
+node_modules/
+npm-debug.log
