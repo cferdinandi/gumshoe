@@ -1,6 +1,6 @@
 /**
- * gumshoe v0.0.1
- * A simple scrollspy plugin, by Chris Ferdinandi.
+ * gumshoe v1.0.0
+ * A simple, framework-agnostic scrollspy script., by Chris Ferdinandi.
  * http://github.com/cferdinandi/gumshoe
  * 
  * Free to use under the MIT License.

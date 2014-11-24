@@ -1,7 +1,7 @@
 {
 	"name": "gumshoe",
-	"version": "0.0.1",
-	"description": "A simple scrollspy plugin",
+	"version": "1.0.0",
+	"description": "A simple, framework-agnostic scrollspy script.",
 	"main": "./dist",
 	"author": {
 		"name": "Chris Ferdinandi",
