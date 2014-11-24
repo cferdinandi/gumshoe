@@ -1,6 +1,0 @@
-[submodule "test/regression/q"]
-	path = test/regression/q
-	url = https://github.com/kriskowal/q.git
-[submodule "test/regression/coffee-script-redux"]
-	path = test/regression/coffee-script-redux
-	url = https://github.com/michaelficarra/CoffeeScriptRedux.git
