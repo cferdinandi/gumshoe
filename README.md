@@ -155,5 +155,7 @@ Gumshoe is licensed under the [MIT License](http://gomakethings.com/mit/).
 
 Gumshoe uses [semantic versioning](http://semver.org/).
 
+* v1.0.1 - March 9, 2015
+	* Fixed UMD wrapper.
 * v1.0.0 - November 24, 2014
 	* Initial release.
