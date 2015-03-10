@@ -1,5 +1,5 @@
 /**
- * gumshoe v1.0.0
+ * gumshoe v1.0.1
  * A simple, framework-agnostic scrollspy script., by Chris Ferdinandi.
  * http://github.com/cferdinandi/gumshoe
  * 
