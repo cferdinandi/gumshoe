@@ -1,5 +1,5 @@
 /**
- * gumshoe v1.0.1
+ * gumshoe v1.0.2
  * A simple, framework-agnostic scrollspy script., by Chris Ferdinandi.
  * http://github.com/cferdinandi/gumshoe
  * 
@@ -259,8 +259,8 @@
 		if ( !settings ) return;
 
 		// Remove event listeners
-		document.removeEventListener('resize', eventHandler, false);
-		document.removeEventListener('scroll', eventHandler, false);
+		root.removeEventListener('resize', eventThrottler, false);
+		root.removeEventListener('scroll', eventThrottler, false);
 
 		// Reset variables
 		navs = [];
