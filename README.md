@@ -155,6 +155,8 @@ Gumshoe is licensed under the [MIT License](http://gomakethings.com/mit/).
 
 Gumshoe uses [semantic versioning](http://semver.org/).
 
+* v1.0.3 - May 13, 2015
+	* Fixed Browserify `window` bug.
 * v1.0.2 - March 10, 2015
 	* Fixed `removeEventListener` bugs.
 * v1.0.1 - March 9, 2015
