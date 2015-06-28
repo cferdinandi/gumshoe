@@ -22,6 +22,8 @@
 	// Default settings
 	var defaults = {
 		offset: 0,
+		selector: '[data-gumshoe] a',
+		headerSelector: '[data-gumshoe-header]',
 		activeClass: 'active',
 		callbackBefore: function () {},
 		callbackAfter: function () {}
@@ -153,7 +155,7 @@
 	var getNavs = function () {
 
 		// Get all navigation links
-		var navLinks = document.querySelectorAll( '[data-gumshoe] a' );
+		var navLinks = document.querySelectorAll( settings.selector );
 
 		// For each link, create an object of attributes and push to an array
 		forEach( navLinks, function (nav) {
@@ -306,7 +308,7 @@
 
 		// Set variables
 		settings = extend( defaults, options || {} ); // Merge user options with defaults
-		header = document.querySelector('[data-gumshoe-header]'); // Get fixed header
+		header = document.querySelector( settings.headerSelector ); // Get fixed header
 		getNavs(); // Get navigation elements
 
 		// If no navigation elements exist, stop running gumshoe
