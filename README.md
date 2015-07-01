@@ -100,6 +100,8 @@ You can pass options and callbacks into Gumshoe through the `init()` function:
 ```javascript
 gumshoe.init({
 	offset: 0, // Distance in pixels to offset calculations
+	selector: '[data-gumshoe] a' // Default link selector
+	headerSelector: '[data-gumshoe-header]' // Fixed header selector
 	activeClass: 'active', // Class to apply to active navigation link and it's parent list item
 	callbackBefore: function (nav) {}, // Callback to before setting active link
 	callbackAfter: function (nav) {} // Callback to run after setting active link
@@ -148,14 +150,3 @@ In lieu of a formal style guide, take care to maintain the existing coding style
 ## License
 
 Gumshoe is licensed under the [MIT License](http://gomakethings.com/mit/).
-
-
-
-## Changelog
-
-Gumshoe uses [semantic versioning](http://semver.org/).
-
-* v1.0.1 - March 9, 2015
-	* Fixed UMD wrapper.
-* v1.0.0 - November 24, 2014
-	* Initial release.

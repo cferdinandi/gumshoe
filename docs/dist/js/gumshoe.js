@@ -1,5 +1,5 @@
 /**
- * gumshoe v1.0.1
+ * gumshoe v1.1.0
  * A simple, framework-agnostic scrollspy script., by Chris Ferdinandi.
  * http://github.com/cferdinandi/gumshoe
  * 
@@ -15,7 +15,7 @@
 	} else {
 		root.gumshoe = factory(root);
 	}
-})(this, function (root) {
+})(typeof global !== "undefined" ? global : this.window || this.global, function (root) {
 
 	'use strict';
 
@@ -31,6 +31,8 @@
 	// Default settings
 	var defaults = {
 		offset: 0,
+		selector: '[data-gumshoe] a',
+		headerSelector: '[data-gumshoe-header]',
 		activeClass: 'active',
 		callbackBefore: function () {},
 		callbackAfter: function () {}
@@ -162,7 +164,7 @@
 	var getNavs = function () {
 
 		// Get all navigation links
-		var navLinks = document.querySelectorAll( '[data-gumshoe] a' );
+		var navLinks = document.querySelectorAll( settings.selector );
 
 		// For each link, create an object of attributes and push to an array
 		forEach( navLinks, function (nav) {
@@ -259,8 +261,8 @@
 		if ( !settings ) return;
 
 		// Remove event listeners
-		document.removeEventListener('resize', eventHandler, false);
-		document.removeEventListener('scroll', eventHandler, false);
+		root.removeEventListener('resize', eventThrottler, false);
+		root.removeEventListener('scroll', eventThrottler, false);
 
 		// Reset variables
 		navs = [];
@@ -315,7 +317,7 @@
 
 		// Set variables
 		settings = extend( defaults, options || {} ); // Merge user options with defaults
-		header = document.querySelector('[data-gumshoe-header]'); // Get fixed header
+		header = document.querySelector( settings.headerSelector ); // Get fixed header
 		getNavs(); // Get navigation elements
 
 		// If no navigation elements exist, stop running gumshoe
