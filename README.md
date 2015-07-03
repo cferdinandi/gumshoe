@@ -24,10 +24,11 @@ Compiled and production-ready code can be found in the `dist` directory. The `sr
 
 ```html
 <script src="dist/js/classList.js"></script>
+<script src="dist/js/buoy.js"></script>
 <script src="dist/js/gumshoe.js"></script>
 ```
 
-Gumshoe requires [classList.js](https://github.com/eligrey/classList.js), a polyfill that extends ECMAScript 5 API support to more browsers.
+Gumshoe requires [classList.js](https://github.com/eligrey/classList.js), a polyfill that extends ECMAScript 5 API support to more browsers. It also requires [Buoy](https://github.com/cferdinandi/buoy), a lightweight collection of helper methods for getting stuff done with native JavaScript.
 
 ### 2. Add the markup to your HTML.
 
@@ -76,7 +77,6 @@ If you would prefer, you can work with the development code in the `src` directo
 Make sure these are installed first.
 
 * [Node.js](http://nodejs.org)
-* [Ruby Sass](http://sass-lang.com/install)
 * [Gulp](http://gulpjs.com) `sudo npm install -g gulp`
 
 ### Quick Start
@@ -103,8 +103,7 @@ gumshoe.init({
 	selector: '[data-gumshoe] a' // Default link selector
 	headerSelector: '[data-gumshoe-header]' // Fixed header selector
 	activeClass: 'active', // Class to apply to active navigation link and it's parent list item
-	callbackBefore: function (nav) {}, // Callback to before setting active link
-	callbackAfter: function (nav) {} // Callback to run after setting active link
+	callback: function (nav) {} // Callback to run after setting active link
 });
 ```
 
@@ -143,10 +142,10 @@ Gumshoe works in all modern browsers, and IE 9 and above.
 
 ## How to Contribute
 
-In lieu of a formal style guide, take care to maintain the existing coding style. Don't forget to update the version number, the changelog (in the `readme.md` file), and when applicable, the documentation.
+In lieu of a formal style guide, take care to maintain the existing coding style. Please apply fixes to both the development and production code. Don't forget to update the version number, and when applicable, the documentation.
 
 
 
 ## License
 
-Gumshoe is licensed under the [MIT License](http://gomakethings.com/mit/).
+The code is available under the [MIT License](LICENSE.md).

@@ -1,5 +1,5 @@
 /**
- * gumshoe v1.1.0
+ * gumshoe v1.2.0
  * A simple, framework-agnostic scrollspy script., by Chris Ferdinandi.
  * http://github.com/cferdinandi/gumshoe
  * 
@@ -9,13 +9,13 @@
 
 (function (root, factory) {
 	if ( typeof define === 'function' && define.amd ) {
-		define([], factory(root));
+		define(['buoy'], factory(root));
 	} else if ( typeof exports === 'object' ) {
-		module.exports = factory(root);
+		module.exports = factory(root, require('buoy'));
 	} else {
-		root.gumshoe = factory(root);
+		root.gumshoe = factory(root, root.buoy);
 	}
-})(typeof global !== "undefined" ? global : this.window || this.global, function (root) {
+})(typeof global !== 'undefined' ? global : this.window || this.global, function (root) {
 
 	'use strict';
 
@@ -34,53 +34,13 @@
 		selector: '[data-gumshoe] a',
 		headerSelector: '[data-gumshoe-header]',
 		activeClass: 'active',
-		callbackBefore: function () {},
-		callbackAfter: function () {}
+		callback: function () {}
 	};
 
 
 	//
 	// Methods
 	//
-
-	/**
-	 * A simple forEach() implementation for Arrays, Objects and NodeLists
-	 * @private
-	 * @param {Array|Object|NodeList} collection Collection of items to iterate
-	 * @param {Function} callback Callback function for each iteration
-	 * @param {Array|Object|NodeList} scope Object/NodeList/Array that forEach is iterating over (aka `this`)
-	 */
-	var forEach = function (collection, callback, scope) {
-		if (Object.prototype.toString.call(collection) === '[object Object]') {
-			for (var prop in collection) {
-				if (Object.prototype.hasOwnProperty.call(collection, prop)) {
-					callback.call(scope, collection[prop], prop, collection);
-				}
-			}
-		} else {
-			for (var i = 0, len = collection.length; i < len; i++) {
-				callback.call(scope, collection[i], i, collection);
-			}
-		}
-	};
-
-	/**
-	 * Merge defaults with user options
-	 * @private
-	 * @param {Object} defaults Default settings
-	 * @param {Object} options User options
-	 * @returns {Object} Merged values of defaults and options
-	 */
-	var extend = function ( defaults, options ) {
-		var extended = {};
-		forEach(defaults, function (value, prop) {
-			extended[prop] = defaults[prop];
-		});
-		forEach(options, function (value, prop) {
-			extended[prop] = options[prop];
-		});
-		return extended;
-	};
 
 	/**
 	 * Get the document element's height
@@ -93,34 +53,6 @@
 			document.body.offsetHeight, document.documentElement.offsetHeight,
 			document.body.clientHeight, document.documentElement.clientHeight
 		);
-	};
-
-	/**
-	 * Get the height of an element
-	 * @private
-	 * @param  {Node} elem The element
-	 * @return {Number}    The element's height
-	 */
-	var getHeight = function ( elem ) {
-		return Math.max( elem.scrollHeight, elem.offsetHeight, elem.clientHeight );
-	};
-
-	/**
-	 * Calculate how far from the top of the document an element is
-	 * @private
-	 * @param {Node} elem The element
-	 * @returns {Number}  The distance from the top of the document
-	 */
-	var getDistance = function ( elem ) {
-		var location = 0;
-		if (elem.offsetParent) {
-			do {
-				location += elem.offsetTop;
-				elem = elem.offsetParent;
-			} while (elem);
-		}
-		location = location - headerHeight - settings.offset;
-		return location >= 0 ? location : 0;
 	};
 
 	/**
@@ -147,9 +79,9 @@
 
 		// Calculate distances
 		docHeight = getDocumentHeight(); // The document
-		headerHeight = header ? ( getHeight(header) + getDistance(header) ) : 0; // The fixed header
-		forEach(navs, function (nav) {
-			nav.distance = getDistance(nav.target); // Each navigation target
+		headerHeight = header ? ( buoy.getHeight(header) + buoy.getOffsetTop(header) ) : 0; // The fixed header
+		buoy.forEach(navs, function (nav) {
+			nav.distance = buoy.getOffsetTop(nav.target); // Each navigation target
 		});
 
 		// When done, organization navigation elements
@@ -167,7 +99,7 @@
 		var navLinks = document.querySelectorAll( settings.selector );
 
 		// For each link, create an object of attributes and push to an array
-		forEach( navLinks, function (nav) {
+		buoy.forEach( navLinks, function (nav) {
 			if ( !nav.hash ) return;
 			navs.push({
 				nav: nav,
@@ -194,15 +126,13 @@
 			}
 		}
 
-		settings.callbackBefore( nav ); // Callback before methods are run
-
 		// Activate the current target's navigation element
 		nav.nav.classList.add( settings.activeClass );
 		if ( nav.parent ) {
 			nav.parent.classList.add( settings.activeClass );
 		}
 
-		settings.callbackAfter( nav ); // Callback after methods are run
+		settings.callback( nav ); // Callback after methods are run
 
 		// Set new currentNav
 		currentNav = {
@@ -241,7 +171,7 @@
 	 * @private
 	 */
 	var setInitCurrentNav = function () {
-		forEach(navs, function (nav) {
+		buoy.forEach(navs, function (nav) {
 			if ( nav.nav.classList.contains( settings.activeClass ) ) {
 				currentNav = {
 					nav: nav.nav,
@@ -316,7 +246,7 @@
 		gumshoe.destroy();
 
 		// Set variables
-		settings = extend( defaults, options || {} ); // Merge user options with defaults
+		settings = buoy.extend( defaults, options || {} ); // Merge user options with defaults
 		header = document.querySelector( settings.headerSelector ); // Get fixed header
 		getNavs(); // Get navigation elements
 
