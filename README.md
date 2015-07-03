@@ -24,10 +24,11 @@ Compiled and production-ready code can be found in the `dist` directory. The `sr
 
 ```html
 <script src="dist/js/classList.js"></script>
+<script src="dist/js/buoy.js"></script>
 <script src="dist/js/gumshoe.js"></script>
 ```
 
-Gumshoe requires [classList.js](https://github.com/eligrey/classList.js), a polyfill that extends ECMAScript 5 API support to more browsers.
+Gumshoe requires [classList.js](https://github.com/eligrey/classList.js), a polyfill that extends ECMAScript 5 API support to more browsers. It also requires [Buoy](https://github.com/cferdinandi/buoy), a lightweight collection of helper methods for getting stuff done with native JavaScript.
 
 ### 2. Add the markup to your HTML.
 
@@ -102,8 +103,7 @@ gumshoe.init({
 	selector: '[data-gumshoe] a' // Default link selector
 	headerSelector: '[data-gumshoe-header]' // Fixed header selector
 	activeClass: 'active', // Class to apply to active navigation link and it's parent list item
-	callbackBefore: function (nav) {}, // Callback to before setting active link
-	callbackAfter: function (nav) {} // Callback to run after setting active link
+	callback: function (nav) {} // Callback to run after setting active link
 });
 ```
 
@@ -148,4 +148,4 @@ In lieu of a formal style guide, take care to maintain the existing coding style
 
 ## License
 
-Gumshoe is licensed under the [MIT License](http://gomakethings.com/mit/).
+The code is available under the [MIT License](LICENSE.md).
