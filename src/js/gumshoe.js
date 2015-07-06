@@ -1,10 +1,10 @@
 (function (root, factory) {
 	if ( typeof define === 'function' && define.amd ) {
-		define(['buoy'], factory(root));
+		define([], factory(root));
 	} else if ( typeof exports === 'object' ) {
-		module.exports = factory(root, require('buoy'));
+		module.exports = factory(root);
 	} else {
-		root.gumshoe = factory(root, root.buoy);
+		root.gumshoe = factory(root);
 	}
 })(typeof global !== 'undefined' ? global : this.window || this.global, function (root) {
 
@@ -34,6 +34,84 @@
 	//
 
 	/**
+	 * A simple forEach() implementation for Arrays, Objects and NodeLists.
+	 * @private
+	 * @author Todd Motto
+	 * @link   https://github.com/toddmotto/foreach
+	 * @param {Array|Object|NodeList} collection Collection of items to iterate
+	 * @param {Function}              callback   Callback function for each iteration
+	 * @param {Array|Object|NodeList} scope      Object/NodeList/Array that forEach is iterating over (aka `this`)
+	 */
+	var forEach = function ( collection, callback, scope ) {
+		if ( Object.prototype.toString.call( collection ) === '[object Object]' ) {
+			for ( var prop in collection ) {
+				if ( Object.prototype.hasOwnProperty.call( collection, prop ) ) {
+					callback.call( scope, collection[prop], prop, collection );
+				}
+			}
+		} else {
+			for ( var i = 0, len = collection.length; i < len; i++ ) {
+				callback.call( scope, collection[i], i, collection );
+			}
+		}
+	};
+
+	/**
+	 * Merge two or more objects. Returns a new object.
+	 * @private
+	 * @param {Boolean}  deep     If true, do a deep (or recursive) merge [optional]
+	 * @param {Object}   objects  The objects to merge together
+	 * @returns {Object}          Merged values of defaults and options
+	 */
+	var extend = function () {
+
+		// Variables
+		var extended = {};
+		var deep = false;
+		var i = 0;
+		var length = arguments.length;
+
+		// Check if a deep merge
+		if ( Object.prototype.toString.call( arguments[0] ) === '[object Boolean]' ) {
+			deep = arguments[0];
+			i++;
+		}
+
+		// Merge the object into the extended object
+		var merge = function (obj) {
+			for ( var prop in obj ) {
+				if ( Object.prototype.hasOwnProperty.call( obj, prop ) ) {
+					// If deep merge and property is an object, merge properties
+					if ( deep && Object.prototype.toString.call(obj[prop]) === '[object Object]' ) {
+						extended[prop] = extend( true, extended[prop], obj[prop] );
+					} else {
+						extended[prop] = obj[prop];
+					}
+				}
+			}
+		};
+
+		// Loop through each object and conduct a merge
+		for ( ; i < length; i++ ) {
+			var obj = arguments[i];
+			merge(obj);
+		}
+
+		return extended;
+
+	};
+
+	/**
+	 * Get the height of an element.
+	 * @private
+	 * @param  {Node} elem The element to get the height of
+	 * @return {Number}    The element's height in pixels
+	 */
+	var getHeight = function ( elem ) {
+		return Math.max( elem.scrollHeight, elem.offsetHeight, elem.clientHeight );
+	};
+
+	/**
 	 * Get the document element's height
 	 * @private
 	 * @returns {Number}
@@ -44,6 +122,23 @@
 			document.body.offsetHeight, document.documentElement.offsetHeight,
 			document.body.clientHeight, document.documentElement.clientHeight
 		);
+	};
+
+	/**
+	 * Get an element's distance from the top of the Document.
+	 * @private
+	 * @param  {Node} elem The element
+	 * @return {Number}    Distance from the top in pixels
+	 */
+	var getOffsetTop = function ( elem ) {
+		var location = 0;
+		if (elem.offsetParent) {
+			do {
+				location += elem.offsetTop;
+				elem = elem.offsetParent;
+			} while (elem);
+		}
+		return location >= 0 ? location : 0;
 	};
 
 	/**
@@ -70,9 +165,9 @@
 
 		// Calculate distances
 		docHeight = getDocumentHeight(); // The document
-		headerHeight = header ? ( buoy.getHeight(header) + buoy.getOffsetTop(header) ) : 0; // The fixed header
-		buoy.forEach(navs, function (nav) {
-			nav.distance = buoy.getOffsetTop(nav.target); // Each navigation target
+		headerHeight = header ? ( getHeight(header) + getOffsetTop(header) ) : 0; // The fixed header
+		forEach(navs, function (nav) {
+			nav.distance = getOffsetTop(nav.target); // Each navigation target
 		});
 
 		// When done, organization navigation elements
@@ -90,7 +185,7 @@
 		var navLinks = document.querySelectorAll( settings.selector );
 
 		// For each link, create an object of attributes and push to an array
-		buoy.forEach( navLinks, function (nav) {
+		forEach( navLinks, function (nav) {
 			if ( !nav.hash ) return;
 			navs.push({
 				nav: nav,
@@ -162,7 +257,7 @@
 	 * @private
 	 */
 	var setInitCurrentNav = function () {
-		buoy.forEach(navs, function (nav) {
+		forEach(navs, function (nav) {
 			if ( nav.nav.classList.contains( settings.activeClass ) ) {
 				currentNav = {
 					nav: nav.nav,
@@ -237,7 +332,7 @@
 		gumshoe.destroy();
 
 		// Set variables
-		settings = buoy.extend( defaults, options || {} ); // Merge user options with defaults
+		settings = extend( defaults, options || {} ); // Merge user options with defaults
 		header = document.querySelector( settings.headerSelector ); // Get fixed header
 		getNavs(); // Get navigation elements
 
