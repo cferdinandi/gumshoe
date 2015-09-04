@@ -3,18 +3,6 @@ A simple, framework-agnostic scrollspy script. Gumshoe works great with [Smooth 
 
 [Download Gumshoe](https://github.com/cferdinandi/gumshoe/archive/master.zip) / [View the demo](http://cferdinandi.github.io/gumshoe/)
 
-**In This Documentation**
-
-1. [Getting Started](#getting-started)
-2. [Installing with Package Managers](#installing-with-package-managers)
-3. [Working with the Source Files](#working-with-the-source-files)
-4. [Options & Settings](#options-and-settings)
-5. [Browser Compatibility](#browser-compatibility)
-6. [How to Contribute](#how-to-contribute)
-7. [License](#license)
-8. [Changelog](#changelog)
-
-
 
 ## Getting Started
 
@@ -23,11 +11,8 @@ Compiled and production-ready code can be found in the `dist` directory. The `sr
 ### 1. Include Gumshoe on your site.
 
 ```html
-<script src="dist/js/classList.js"></script>
 <script src="dist/js/gumshoe.js"></script>
 ```
-
-Gumshoe requires [classList.js](https://github.com/eligrey/classList.js), a polyfill that extends ECMAScript 5 API support to more browsers.
 
 ### 2. Add the markup to your HTML.
 
@@ -85,6 +70,7 @@ Make sure these are installed first.
 3. When it's done installing, run one of the task runners to get going:
 	* `gulp` manually compiles files.
 	* `gulp watch` automatically compiles files and applies changes using [LiveReload](http://livereload.com/).
+	* `gulp test` compiles files and runs unit tests.
 
 
 
@@ -98,9 +84,9 @@ You can pass options and callbacks into Gumshoe through the `init()` function:
 
 ```javascript
 gumshoe.init({
+	selector: '[data-gumshoe] a' // Default link selector (must use a valid CSS selector)
+	selectorHeader: '[data-gumshoe-header]' // Fixed header selector (must use a valid CSS selector)
 	offset: 0, // Distance in pixels to offset calculations
-	selector: '[data-gumshoe] a' // Default link selector
-	headerSelector: '[data-gumshoe-header]' // Fixed header selector
 	activeClass: 'active', // Class to apply to active navigation link and it's parent list item
 	callback: function (nav) {} // Callback to run after setting active link
 });
@@ -135,7 +121,7 @@ gumshoe.destroy();
 
 ## Browser Compatibility
 
-Gumshoe works in all modern browsers, and IE 9 and above.
+Gumshoe works in all modern browsers, and IE 10 and above. You can extend browser support back to IE 9 with the [classList.js polyfill](https://github.com/eligrey/classList.js/).
 
 
 

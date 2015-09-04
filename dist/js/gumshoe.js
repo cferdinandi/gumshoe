@@ -1,10 +1,8 @@
-/**
- * gumshoe v2.0.1
- * A simple, framework-agnostic scrollspy script., by Chris Ferdinandi.
+/*!
+ * gumshoe v3.0.0: A simple, framework-agnostic scrollspy script.
+ * (c) 2015 Chris Ferdinandi
+ * MIT License
  * http://github.com/cferdinandi/gumshoe
- * 
- * Free to use under the MIT License.
- * http://gomakethings.com/mit/
  */
 
 (function (root, factory) {
@@ -24,15 +22,15 @@
 	//
 
 	var gumshoe = {}; // Object for public APIs
-	var supports = !!document.querySelector && !!root.addEventListener; // Feature test
+	var supports = 'querySelector' in document && 'addEventListener' in root && 'classList' in document.createElement('_'); // Feature test
 	var navs = []; // Array for nav elements
 	var settings, eventTimeout, docHeight, header, headerHeight, currentNav;
 
 	// Default settings
 	var defaults = {
-		offset: 0,
 		selector: '[data-gumshoe] a',
-		headerSelector: '[data-gumshoe-header]',
+		selectorHeader: '[data-gumshoe-header]',
+		offset: 0,
 		activeClass: 'active',
 		callback: function () {}
 	};
@@ -343,7 +341,7 @@
 
 		// Set variables
 		settings = extend( defaults, options || {} ); // Merge user options with defaults
-		header = document.querySelector( settings.headerSelector ); // Get fixed header
+		header = document.querySelector( settings.selectorHeader ); // Get fixed header
 		getNavs(); // Get navigation elements
 
 		// If no navigation elements exist, stop running gumshoe
