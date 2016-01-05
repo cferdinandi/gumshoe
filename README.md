@@ -1,6 +1,8 @@
 # Gumshoe [![Build Status](https://travis-ci.org/cferdinandi/gumshoe.svg)](https://travis-ci.org/cferdinandi/gumshoe)
 A simple, framework-agnostic scrollspy script. Gumshoe works great with [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll).
 
+*See Gumshoe in action on Apple's [Swift.org website](https://swift.org/).*
+
 [Download Gumshoe](https://github.com/cferdinandi/gumshoe/archive/master.zip) / [View the demo](http://cferdinandi.github.io/gumshoe/)
 
 
