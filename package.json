@@ -1,8 +1,8 @@
 {
 	"name": "gumshoe",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"description": "A simple, framework-agnostic scrollspy script.",
-	"main": "./dist",
+	"main": "./dist/js/gumshoe.min.js",
 	"author": {
 		"name": "Chris Ferdinandi",
 		"url": "http://gomakethings.com"
