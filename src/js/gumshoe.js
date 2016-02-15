@@ -137,6 +137,8 @@
 				location += elem.offsetTop;
 				elem = elem.offsetParent;
 			} while (elem);
+		} else {
+			location = elem.offsetTop;
 		}
 		location = location - headerHeight - settings.offset;
 		return location >= 0 ? location : 0;
