@@ -1,5 +1,5 @@
 /*!
- * gumshoe v3.0.1: A simple, framework-agnostic scrollspy script.
+ * gumshoe v3.0.2: A simple, framework-agnostic scrollspy script.
  * (c) 2016 Chris Ferdinandi
  * MIT License
  * http://github.com/cferdinandi/gumshoe
@@ -144,6 +144,8 @@
 				location += elem.offsetTop;
 				elem = elem.offsetParent;
 			} while (elem);
+		} else {
+			location = elem.offsetTop;
 		}
 		location = location - headerHeight - settings.offset;
 		return location >= 0 ? location : 0;
