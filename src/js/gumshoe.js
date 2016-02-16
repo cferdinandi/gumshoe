@@ -188,9 +188,11 @@
 		// For each link, create an object of attributes and push to an array
 		forEach( navLinks, function (nav) {
 			if ( !nav.hash ) return;
+			var target = document.querySelector( nav.hash );
+			if ( !target ) return;
 			navs.push({
 				nav: nav,
-				target: document.querySelector( nav.hash ),
+				target: target,
 				parent: nav.parentNode.tagName.toLowerCase() === 'li' ? nav.parentNode : null,
 				distance: 0
 			});
