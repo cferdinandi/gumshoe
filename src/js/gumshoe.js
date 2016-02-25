@@ -192,7 +192,7 @@
 			if ( !nav.hash ) return;
 			navs.push({
 				nav: nav,
-				target: document.querySelector( nav.hash ),
+				target: document.getElementById( nav.hash.substr( 1 ) ),
 				parent: nav.parentNode.tagName.toLowerCase() === 'li' ? nav.parentNode : null,
 				distance: 0
 			});
