@@ -207,12 +207,12 @@
 
 	};
 
+
 	/**
-	 * Add the activation class to the currently active navigation element
+	 * Remove the activation class from the currently active navigation element
 	 * @private
-	 * @param  {Node} nav The currently active nav
 	 */
-	var activateNav = function ( nav ) {
+	var deactivateCurrentNav = function () {
 
 		// If a current Nav is set, deactivate it
 		if ( currentNav ) {
@@ -221,6 +221,16 @@
 				currentNav.parent.classList.remove( settings.activeClass );
 			}
 		}
+	};
+
+	/**
+	 * Add the activation class to the currently active navigation element
+	 * @private
+	 * @param  {Node} nav The currently active nav
+	 */
+	var activateNav = function ( nav ) {
+
+		deactivateCurrentNav();
 
 		// Activate the current target's navigation element
 		nav.nav.classList.add( settings.activeClass );
@@ -259,6 +269,9 @@
 				return activateNav( nav );
 			}
 		}
+
+		// Didn't find an active nav (e.g. above all headers)
+		deactivateCurrentNav();
 
 	};
 
