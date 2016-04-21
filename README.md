@@ -129,7 +129,7 @@ Gumshoe works in all modern browsers, and IE 10 and above. You can extend browse
 
 ## How to Contribute
 
-In lieu of a formal style guide, take care to maintain the existing coding style. Please apply fixes to both the development and production code. Don't forget to update the version number, and when applicable, the documentation.
+Please review the  [contributing guidelines](CONTRIBUTING.md).
 
 
 
