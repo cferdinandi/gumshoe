@@ -145,6 +145,21 @@
 	};
 
 	/**
+	 * Determine if an element is in the viewport
+	 * @param  {Node}    elem The element
+	 * @return {Boolean}      Returns true if element is in the viewport
+	 */
+	var isInViewport = function ( elem ) {
+		var distance = elem.getBoundingClientRect();
+		return (
+			distance.top >= 0 &&
+			distance.left >= 0 &&
+			distance.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+			distance.right <= (window.innerWidth || document.documentElement.clientWidth)
+		);
+	};
+
+	/**
 	 * Arrange nagivation elements from furthest from the top to closest
 	 * @private
 	 */
@@ -200,6 +215,20 @@
 
 	};
 
+
+	/**
+	 * Remove the activation class from the currently active navigation element
+	 * @private
+	 */
+	var deactivateCurrentNav = function () {
+		if ( currentNav ) {
+			currentNav.nav.classList.remove( settings.activeClass );
+			if ( currentNav.parent ) {
+				currentNav.parent.classList.remove( settings.activeClass );
+			}
+		}
+	};
+
 	/**
 	 * Add the activation class to the currently active navigation element
 	 * @private
@@ -208,12 +237,7 @@
 	var activateNav = function ( nav ) {
 
 		// If a current Nav is set, deactivate it
-		if ( currentNav ) {
-			currentNav.nav.classList.remove( settings.activeClass );
-			if ( currentNav.parent ) {
-				currentNav.parent.classList.remove( settings.activeClass );
-			}
-		}
+		deactivateCurrentNav();
 
 		// Activate the current target's navigation element
 		nav.nav.classList.add( settings.activeClass );
@@ -240,8 +264,8 @@
 		// Get current position from top of the document
 		var position = root.pageYOffset;
 
-		// If at the bottom of the page, activate the last nav
-		if ( (root.innerHeight + position) >= docHeight ) {
+		// If at the bottom of the page and last section is in the viewport, activate the last nav
+		if ( (root.innerHeight + position) >= docHeight && isInViewport( navs[0].target ) ) {
 			return activateNav( navs[0] );
 		}
 
@@ -252,6 +276,9 @@
 				return activateNav( nav );
 			}
 		}
+
+		// Didn't find an active nav (e.g. above all headers)
+		deactivateCurrentNav();
 
 	};
 
