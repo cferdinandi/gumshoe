@@ -145,6 +145,21 @@
 	};
 
 	/**
+	 * Determine if an element is in the viewport
+	 * @param  {Node}    elem The element
+	 * @return {Boolean}      Returns true if element is in the viewport
+	 */
+	var isInViewport = function ( elem ) {
+		var distance = elem.getBoundingClientRect();
+		return (
+			distance.top >= 0 &&
+			distance.left >= 0 &&
+			distance.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+			distance.right <= (window.innerWidth || document.documentElement.clientWidth)
+		);
+	};
+
+	/**
 	 * Arrange nagivation elements from furthest from the top to closest
 	 * @private
 	 */
@@ -206,8 +221,6 @@
 	 * @private
 	 */
 	var deactivateCurrentNav = function () {
-
-		// If a current Nav is set, deactivate it
 		if ( currentNav ) {
 			currentNav.nav.classList.remove( settings.activeClass );
 			if ( currentNav.parent ) {
@@ -223,6 +236,7 @@
 	 */
 	var activateNav = function ( nav ) {
 
+		// If a current Nav is set, deactivate it
 		deactivateCurrentNav();
 
 		// Activate the current target's navigation element
@@ -250,8 +264,8 @@
 		// Get current position from top of the document
 		var position = root.pageYOffset;
 
-		// If at the bottom of the page, activate the last nav
-		if ( (root.innerHeight + position) >= docHeight ) {
+		// If at the bottom of the page and last section is in the viewport, activate the last nav
+		if ( (root.innerHeight + position) >= docHeight && isInViewport( navs[0].target ) ) {
 			return activateNav( navs[0] );
 		}
 
