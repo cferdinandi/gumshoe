@@ -1,5 +1,5 @@
 /*!
- * gumshoe v3.1.0: A simple, framework-agnostic scrollspy script.
+ * gumshoe v3.1.1: A simple, framework-agnostic scrollspy script.
  * (c) 2016 Chris Ferdinandi
  * MIT License
  * http://github.com/cferdinandi/gumshoe
@@ -212,9 +212,11 @@
 		// For each link, create an object of attributes and push to an array
 		forEach( navLinks, function (nav) {
 			if ( !nav.hash ) return;
+			var target = document.querySelector( nav.hash );
+			if ( !target ) return;
 			navs.push({
 				nav: nav,
-				target: document.querySelector( nav.hash ),
+				target: target,
 				parent: nav.parentNode.tagName.toLowerCase() === 'li' ? nav.parentNode : null,
 				distance: 0
 			});
@@ -279,12 +281,12 @@
 		// Otherwise, loop through each nav until you find the active one
 		for (var i = 0, len = navs.length; i < len; i++) {
 			var nav = navs[i];
-			if ( nav.distance < position ) {
+			if ( nav.distance <= position ) {
 				return activateNav( nav );
 			}
 		}
 
-		// Didn't find an active nav (e.g. above all headers)
+		// If no active nav is found, deactivate the current nav
 		deactivateCurrentNav();
 
 	};
