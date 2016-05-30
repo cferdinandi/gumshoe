@@ -267,6 +267,7 @@
 	/**
 	 * Determine which navigation element is currently active and run activation method
 	 * @public
+	 * @returns {Object} The current nav data.
 	 */
 	gumshoe.getCurrentNav = function () {
 
@@ -275,19 +276,24 @@
 
 		// If at the bottom of the page and last section is in the viewport, activate the last nav
 		if ( (root.innerHeight + position) >= docHeight && isInViewport( navs[0].target ) ) {
-			return activateNav( navs[0] );
+			activateNav( navs[0] );
+
+			return navs[0];
 		}
 
 		// Otherwise, loop through each nav until you find the active one
 		for (var i = 0, len = navs.length; i < len; i++) {
 			var nav = navs[i];
 			if ( nav.distance <= position ) {
-				return activateNav( nav );
+				activateNav( nav );
+
+				return nav;
 			}
 		}
 
 		// If no active nav is found, deactivate the current nav
 		deactivateCurrentNav();
+		settings.callback();
 
 	};
 
