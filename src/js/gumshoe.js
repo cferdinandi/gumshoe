@@ -270,7 +270,6 @@
 		// If at the bottom of the page and last section is in the viewport, activate the last nav
 		if ( (root.innerHeight + position) >= docHeight && isInViewport( navs[0].target ) ) {
 			activateNav( navs[0] );
-
 			return navs[0];
 		}
 
@@ -279,7 +278,6 @@
 			var nav = navs[i];
 			if ( nav.distance <= position ) {
 				activateNav( nav );
-
 				return nav;
 			}
 		}
