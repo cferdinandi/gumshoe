@@ -86,8 +86,8 @@ You can pass options and callbacks into Gumshoe through the `init()` function:
 
 ```javascript
 gumshoe.init({
-	selector: '[data-gumshoe] a' // Default link selector (must use a valid CSS selector)
-	selectorHeader: '[data-gumshoe-header]' // Fixed header selector (must use a valid CSS selector)
+	selector: '[data-gumshoe] a', // Default link selector (must use a valid CSS selector)
+	selectorHeader: '[data-gumshoe-header]', // Fixed header selector (must use a valid CSS selector)
 	offset: 0, // Distance in pixels to offset calculations
 	activeClass: 'active', // Class to apply to active navigation link and it's parent list item
 	callback: function (nav) {} // Callback to run after setting active link
