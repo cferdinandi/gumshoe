@@ -1,5 +1,5 @@
 /*!
- * gumshoe v3.2.0: A simple, framework-agnostic scrollspy script.
+ * gumshoe v3.3.0: A simple, framework-agnostic scrollspy script.
  * (c) 2016 Chris Ferdinandi
  * MIT License
  * http://github.com/cferdinandi/gumshoe
