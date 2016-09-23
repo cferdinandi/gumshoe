@@ -1,5 +1,5 @@
 /*!
- * gumshoe v3.3.0: A simple, framework-agnostic scrollspy script.
+ * gumshoe v3.3.1: A simple, framework-agnostic scrollspy script.
  * (c) 2016 Chris Ferdinandi
  * MIT License
  * http://github.com/cferdinandi/gumshoe
@@ -13,7 +13,7 @@
 	} else {
 		root.gumshoe = factory(root);
 	}
-})(typeof global !== 'undefined' ? global : this.window || this.global, function (root) {
+})(typeof global !== 'undefined' ? global : this.window || this.global, (function (root) {
 
 	'use strict';
 
@@ -172,7 +172,7 @@
 	 * @private
 	 */
 	var sortNavs = function () {
-		navs.sort( function (a, b) {
+		navs.sort( (function (a, b) {
 			if (a.distance > b.distance) {
 				return -1;
 			}
@@ -180,7 +180,7 @@
 				return 1;
 			}
 			return 0;
-		});
+		}));
 	};
 
 	/**
@@ -192,9 +192,9 @@
 		// Calculate distances
 		docHeight = getDocumentHeight(); // The document
 		headerHeight = header ? ( getHeight(header) + getOffsetTop(header) ) : 0; // The fixed header
-		forEach(navs, function (nav) {
+		forEach(navs, (function (nav) {
 			nav.distance = getOffsetTop(nav.target); // Each navigation target
-		});
+		}));
 
 		// When done, organization navigation elements
 		sortNavs();
@@ -211,7 +211,7 @@
 		var navLinks = document.querySelectorAll( settings.selector );
 
 		// For each link, create an object of attributes and push to an array
-		forEach( navLinks, function (nav) {
+		forEach( navLinks, (function (nav) {
 			if ( !nav.hash ) return;
 			var target = document.querySelector( nav.hash );
 			if ( !target ) return;
@@ -221,7 +221,7 @@
 				parent: nav.parentNode.tagName.toLowerCase() === 'li' ? nav.parentNode : null,
 				distance: 0
 			});
-		});
+		}));
 
 	};
 
@@ -301,14 +301,14 @@
 	 * @private
 	 */
 	var setInitCurrentNav = function () {
-		forEach(navs, function (nav) {
+		forEach(navs, (function (nav) {
 			if ( nav.nav.classList.contains( settings.activeClass ) ) {
 				currentNav = {
 					nav: nav.nav,
 					parent: nav.parent
 				};
 			}
-		});
+		}));
 	};
 
 	/**
@@ -343,7 +343,7 @@
 	 */
 	var eventThrottler = function (event) {
 		if ( !eventTimeout ) {
-			eventTimeout = setTimeout(function() {
+			eventTimeout = setTimeout((function() {
 
 				eventTimeout = null; // Reset timeout
 
@@ -358,7 +358,7 @@
 					gumshoe.getCurrentNav();
 				}
 
-			}, 66);
+			}), 66);
 		}
 	};
 
@@ -401,4 +401,4 @@
 
 	return gumshoe;
 
-});
+}));
