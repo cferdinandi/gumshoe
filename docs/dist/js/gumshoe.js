@@ -1,5 +1,5 @@
 /*!
- * gumshoe v3.3.1: A simple, framework-agnostic scrollspy script.
+ * gumshoe v3.3.2: A simple, framework-agnostic scrollspy script.
  * (c) 2016 Chris Ferdinandi
  * MIT License
  * http://github.com/cferdinandi/gumshoe
@@ -162,8 +162,8 @@
 		return (
 			distance.top >= 0 &&
 			distance.left >= 0 &&
-			distance.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-			distance.right <= (window.innerWidth || document.documentElement.clientWidth)
+			distance.bottom <= (root.innerHeight || document.documentElement.clientHeight) &&
+			distance.right <= (root.innerWidth || document.documentElement.clientWidth)
 		);
 	};
 
