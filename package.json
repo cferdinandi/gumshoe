@@ -29,6 +29,7 @@
     "gulp-tap": "^0.1.3",
     "gulp-uglify": "^2.0.0",
     "gulp-watch": "^4.3.9",
+    "jshint": "^2.9.4",
     "jshint-stylish": "^2.2.1",
     "lazypipe": "^1.0.1",
     "node-fs": "^0.1.7"
