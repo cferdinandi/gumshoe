@@ -90,9 +90,12 @@ gumshoe.init({
 	container: window, // The element to spy on scrolling in (must be a valid DOM Node)
 	offset: 0, // Distance in pixels to offset calculations
 	activeClass: 'active', // Class to apply to active navigation link and it's parent list item
+	scrollEventDelay: 66, // Milliseconds to throttle the scroll event. The default 66 provides smooth 24fps animation.
 	callback: function (nav) {} // Callback to run after setting active link
 });
 ```
+
+The `scrollEventDelay` option can be useful in preventing the elements of your navigation from being highlighted and unhighlighted in rapid succession when quickly scrolling (e.g., with [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)) through a page with many navigation items (e.g., a long document with a table of contents in the sidebar). The higher the number, the less quickly navigation items will be activated when scrolling; `400` seems to do the trick with longer navigations.
 
 ### Use Gumshoe events in your own scripts
 

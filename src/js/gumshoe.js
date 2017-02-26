@@ -17,7 +17,7 @@
 	var gumshoe = {}; // Object for public APIs
 	var supports = 'querySelector' in document && 'addEventListener' in root && 'classList' in document.createElement('_'); // Feature test
 	var navs = []; // Array for nav elements
-	var settings, eventTimeout, docHeight, header, headerHeight, currentNav;
+	var settings, eventTimeout, docHeight, header, headerHeight, currentNav, scrollEventDelay;
 
 	// Default settings
 	var defaults = {
@@ -26,6 +26,7 @@
 		container: root,
 		offset: 0,
 		activeClass: 'active',
+		scrollEventDelay: 66,
 		callback: function () {}
 	};
 
@@ -325,6 +326,7 @@
 		header = null;
 		headerHeight = null;
 		currentNav = null;
+		scrollEventDelay = null;
 
 	};
 
@@ -351,7 +353,7 @@
 					gumshoe.getCurrentNav();
 				}
 
-			}, 66);
+			}, settings.scrollEventDelay);
 		}
 	};
 
