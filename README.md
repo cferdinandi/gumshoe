@@ -31,7 +31,7 @@ Compiled and production-ready code can be found in the `dist` directory. The `sr
 
 Add the `[data-gumshoe]` attribute to the navigation list that Gumshoe should watch.
 
-If you're using a fixed header, add the `[data-gumshoe-header]` attribute and Gumshoe will automatically offset it's calculations based on the header's height and distance from the top of the page.  If you have multiple fixed headers, add `[data-gumshoe-header]` to the last one in the markup.
+If you're using a fixed header, add the `[data-gumshoe-header]` attribute and Gumshoe will automatically offset its calculations based on the header's height and distance from the top of the page.  If you have multiple fixed headers, add `[data-gumshoe-header]` to the last one in the markup.
 
 ### 3. Initialize Gumshoe.
 
@@ -89,7 +89,7 @@ gumshoe.init({
 	selectorHeader: '[data-gumshoe-header]', // Fixed header selector (must use a valid CSS selector)
 	container: window, // The element to spy on scrolling in (must be a valid DOM Node)
 	offset: 0, // Distance in pixels to offset calculations
-	activeClass: 'active', // Class to apply to active navigation link and it's parent list item
+	activeClass: 'active', // Class to apply to active navigation link and its parent list item
 	scrollEventDelay: 66, // Milliseconds to throttle the scroll event. The default 66 provides smooth 24fps animation.
 	callback: function (nav) {} // Callback to run after setting active link
 });
