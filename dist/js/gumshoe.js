@@ -1,6 +1,6 @@
 /*!
- * gumshoe v3.3.2: A simple, framework-agnostic scrollspy script.
- * (c) 2016 Chris Ferdinandi
+ * gumshoe v3.4: A simple, framework-agnostic scrollspy script.
+ * (c) 2017 Chris Ferdinandi
  * MIT License
  * http://github.com/cferdinandi/gumshoe
  */
@@ -33,6 +33,7 @@
 		container: root,
 		offset: 0,
 		activeClass: 'active',
+		scrollEventDelay: 66,
 		callback: function () {}
 	};
 
@@ -358,7 +359,7 @@
 					gumshoe.getCurrentNav();
 				}
 
-			}), 66);
+			}), settings.scrollEventDelay);
 		}
 	};
 
