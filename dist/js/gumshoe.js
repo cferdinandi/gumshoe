@@ -24,7 +24,7 @@
 	var gumshoe = {}; // Object for public APIs
 	var supports = 'querySelector' in document && 'addEventListener' in root && 'classList' in document.createElement('_'); // Feature test
 	var navs = []; // Array for nav elements
-	var settings, eventTimeout, docHeight, header, headerHeight, currentNav, scrollEventDelay;
+	var settings, eventTimeout, docHeight, header, headerHeight, currentNav;
 
 	// Default settings
 	var defaults = {
@@ -333,7 +333,6 @@
 		header = null;
 		headerHeight = null;
 		currentNav = null;
-		scrollEventDelay = null;
 
 	};
 
