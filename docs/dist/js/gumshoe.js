@@ -1,5 +1,5 @@
 /*!
- * gumshoe v3.4: A simple, framework-agnostic scrollspy script.
+ * gumshoe v3.5.0: A simple, framework-agnostic scrollspy script.
  * (c) 2017 Chris Ferdinandi
  * MIT License
  * http://github.com/cferdinandi/gumshoe
@@ -33,7 +33,7 @@
 		container: root,
 		offset: 0,
 		activeClass: 'active',
-		scrollEventDelay: 66,
+		scrollDelay: false,
 		callback: function () {}
 	};
 
@@ -338,6 +338,24 @@
 	};
 
 	/**
+	 * Run functions after scrolling stops
+	 * @param  {[type]} event [description]
+	 * @return {[type]}       [description]
+	 */
+	var scrollStop = function (event) {
+
+		// Clear our timeout throughout the scroll
+		window.clearTimeout( eventTimeout );
+
+		// recalculate distances and then get currently active nav
+		eventTimeout = setTimeout((function() {
+			gumshoe.setDistances();
+			gumshoe.getCurrentNav();
+		}), 66);
+
+	};
+
+	/**
 	 * On window scroll and resize, only run events at a rate of 15fps for better performance
 	 * @private
 	 * @param  {Function} eventTimeout Timeout function
@@ -360,7 +378,7 @@
 					gumshoe.getCurrentNav();
 				}
 
-			}), settings.scrollEventDelay);
+			}), 66);
 		}
 	};
 
@@ -392,7 +410,11 @@
 
 		// Listen for events
 		settings.container.addEventListener('resize', eventThrottler, false);
-		settings.container.addEventListener('scroll', eventThrottler, false);
+		if ( settings.scrollDelay ) {
+			settings.container.addEventListener('scroll', scrollStop, false);
+		} else {
+			settings.container.addEventListener('scroll', eventThrottler, false);
+		}
 
 	};
 
