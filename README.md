@@ -6,6 +6,14 @@ A simple, framework-agnostic scrollspy script. Gumshoe works great with [Smooth 
 [Download Gumshoe](https://github.com/cferdinandi/gumshoe/archive/master.zip) / [View the demo](http://cferdinandi.github.io/gumshoe/)
 
 
+<hr>
+
+### Want to learn how to write your own vanilla JS plugins? Check out ["The Vanilla JS Guidebook"](https://gomakethings.com/vanilla-js-guidebook/) and level-up as a web developer. 🚀
+
+<hr>
+
+
+
 ## Getting Started
 
 Compiled and production-ready code can be found in the `dist` directory. The `src` directory contains development code.
