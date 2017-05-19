@@ -1,5 +1,5 @@
 /*!
- * gumshoe v3.5.0: A simple, framework-agnostic scrollspy script.
+ * gumshoe v3.5.1: A simple, framework-agnostic scrollspy script.
  * (c) 2017 Chris Ferdinandi
  * MIT License
  * http://github.com/cferdinandi/gumshoe
@@ -214,7 +214,7 @@
 		// For each link, create an object of attributes and push to an array
 		forEach( navLinks, (function (nav) {
 			if ( !nav.hash ) return;
-			var target = document.querySelector( nav.hash );
+			var target = document.querySelector( "[id='" + ("" + nav.hash).replace( /^#/, "" ).replace( /'/g, "\\\'" ) + "']" );
 			if ( !target ) return;
 			navs.push({
 				nav: nav,
