@@ -125,14 +125,26 @@
 			document.body.clientHeight, document.documentElement.clientHeight
 		);
 	};
+	
+	/**
+	 * Get the document element's height
+	 * @private
+	 * @param  {Node} nav Nav element
+	 * @param  {Node} target Target element
+	 * @returns {Number}
+	 */
+	var getDefaultOffset = function (nav, target) {
+		return parseInt(typeof settings.offset === 'function' ? settings.offset(nav, target) : settings.offset, 10);
+	};
 
 	/**
 	 * Get an element's distance from the top of the Document.
 	 * @private
 	 * @param  {Node} elem The element
+	 * @param  {Number} offset static offset
 	 * @return {Number}    Distance from the top in pixels
 	 */
-	var getOffsetTop = function ( elem ) {
+	var getOffsetTop = function ( elem, offset ) {
 		var location = 0;
 		if (elem.offsetParent) {
 			do {
@@ -142,7 +154,7 @@
 		} else {
 			location = elem.offsetTop;
 		}
-		location = location - headerHeight - settings.offset;
+		location = location - headerHeight - offset;
 		return location >= 0 ? location : 0;
 	};
 
@@ -185,9 +197,10 @@
 
 		// Calculate distances
 		docHeight = getDocumentHeight(); // The document
-		headerHeight = header ? ( getHeight(header) + getOffsetTop(header) ) : 0; // The fixed header
+		headerHeight = header ? ( getHeight(header) + getOffsetTop(header, getDefaultOffset(header)) ) : 0; // The fixed header
+		
 		forEach(navs, function (nav) {
-			nav.distance = getOffsetTop(nav.target); // Each navigation target
+			nav.distance = getOffsetTop(nav.target, getDefaultOffset(nav.nav, nav.target)); // Each navigation target
 		});
 
 		// When done, organization navigation elements
