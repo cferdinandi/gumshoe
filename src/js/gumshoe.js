@@ -267,7 +267,8 @@
 	gumshoe.getCurrentNav = function () {
 
 		// Get current position from top of the document
-		var position = root.pageYOffset;
+		var attr = settings.container == window ? 'pageYOffset' : 'scrollTop';
+		var position = settings.container[attr];
 
 		// If at the bottom of the page and last section is in the viewport, activate the last nav
 		if ( (root.innerHeight + position) >= docHeight && isInViewport( navs[0].target ) ) {
