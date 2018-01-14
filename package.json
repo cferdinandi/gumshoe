@@ -1,6 +1,6 @@
 {
   "name": "gumshoe",
-  "version": "3.5.0",
+  "version": "3.5.1",
   "description": "A simple, framework-agnostic scrollspy script.",
   "main": "./dist/js/gumshoe.min.js",
   "author": {
