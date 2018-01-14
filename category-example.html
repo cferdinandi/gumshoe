@@ -302,6 +302,10 @@ gumshoe.init({
 		 *
 		 * So, if you are viewing Invasion 1, Invasion 2 or Invasion 3:
 		 * This will highlight that game *and* the Invasion category.
+		 *
+		 * If the classList.contains() condition fails,
+		 * we return falsey, which is interpreted as
+		 * "there's nobody other than myself who should be activated when I get activated"
 		 */ 
 		return domNode.classList.contains('dropdown-item')
 			&& domNode.parentNode

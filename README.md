@@ -106,6 +106,8 @@ gumshoe.init({
 	 *
 	 * For example, if domNode is a link nested inside some category:
 	 * you could return the category heading Node.
+	 *
+	 * Return a falsey value if you don't want this node to activate other nodes.
 	 * 
 	 * @param {Node} domNode The dom element (selected by `selector`) that has been activated
 	 * @return {Node} An element to activate
