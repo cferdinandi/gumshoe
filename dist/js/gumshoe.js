@@ -1,6 +1,6 @@
 /*!
- * gumshoe v3.5.0: A simple, framework-agnostic scrollspy script.
- * (c) 2017 Chris Ferdinandi
+ * gumshoe v3.5.1: A simple, framework-agnostic scrollspy script.
+ * (c) 2018 Chris Ferdinandi
  * MIT License
  * http://github.com/cferdinandi/gumshoe
  */
@@ -34,7 +34,10 @@
 		offset: 0,
 		activeClass: 'active',
 		scrollDelay: false,
-		callback: function () {}
+		callback: function () {},
+		activateAlso: function(domNode) {
+			return null;
+		}
 	};
 
 
@@ -219,6 +222,7 @@
 			navs.push({
 				nav: nav,
 				target: target,
+				activateAlso: settings.activateAlso && settings.activateAlso(nav),
 				parent: nav.parentNode.tagName.toLowerCase() === 'li' ? nav.parentNode : null,
 				distance: 0
 			});
@@ -236,6 +240,10 @@
 			currentNav.nav.classList.remove( settings.activeClass );
 			if ( currentNav.parent ) {
 				currentNav.parent.classList.remove( settings.activeClass );
+			}
+			if ( currentNav.activateAlso &&
+				currentNav.activateAlso.classList ) {
+				currentNav.activateAlso.classList.remove( settings.activeClass );
 			}
 		}
 	};
@@ -255,13 +263,18 @@
 		if ( nav.parent ) {
 			nav.parent.classList.add( settings.activeClass );
 		}
+		if ( nav.activateAlso &&
+			nav.activateAlso.classList ) {
+			nav.activateAlso.classList.add( settings.activeClass );
+		}
 
 		settings.callback( nav ); // Callback after methods are run
 
 		// Set new currentNav
 		currentNav = {
 			nav: nav.nav,
-			parent: nav.parent
+			parent: nav.parent,
+			activateAlso: nav.activateAlso
 		};
 
 	};
