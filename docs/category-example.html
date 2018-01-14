@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Gumshoe Categories</title>
+</head>
+<body>
+
+<div data-gumshoe-header class="bs-docs-sidebar">
+	<ul data-gumshoe class="nav nav-stacked fixed">
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#invasion">Invasion</a>
+			<ul class="dropdown-menu">
+				<li>
+					<a class="dropdown-item" href="#invasion-1">Invasion 1</a>
+				</li>
+				<li>
+					<a class="dropdown-item" href="#invasion-2">Invasion 2</a>
+				</li>
+				<li>
+					<a class="dropdown-item" href="#invasion-3">Invasion 3</a>
+				</li>
+			</ul>
+		</li>
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#commando">Commando</a>
+			<ul class="dropdown-menu">
+				<li>
+					<a class="dropdown-item" href="#commando-1">Commando 1</a>
+				</li>
+				<li>
+					<a class="dropdown-item" href="#commando-2">Commando 2</a>
+				</li>
+				<li>
+					<a class="dropdown-item" href="#commando-3">Commando 3</a>
+				</li>
+			</ul>
+		</li>
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#one-shots">One-shots</a>
+			<ul class="dropdown-menu">
+				<li>
+					<a class="dropdown-item" href="#stick-shoot">Stick Shoot</a>
+				</li>
+				<li>
+					<a class="dropdown-item" href="#the-box">The Box</a>
+				</li>
+				<li>
+					<a class="dropdown-item" href="#cave-escape">Cave Escape</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<section>
+	<h1>Games</h1>
+	<h2 id="invasion">Invasion</h2>
+	<h3 id="invasion-1">Invasion 1</h3>
+	<p>Some text.</p>
+	<p>It's a good thing.</p>
+	<h3 id="invasion-2">Invasion 2</h3>
+	<p>Some text.</p>
+	<p>It's a good thing.</p>
+	<h3 id="invasion-3">Invasion 3</h3>
+	<p>Some text.</p>
+	<p>It's a good thing.</p>
+	<h2 id="commando">Commando</h2>
+	<h3 id="commando-1">Commando 1</h3>
+	<p>Some text.</p>
+	<p>It's a good thing.</p>
+	<h3 id="commando-2">Commando 2</h3>
+	<p>Some text.</p>
+	<p>It's a good thing.</p>
+	<h3 id="commando-3">Commando 3</h3>
+	<p>Some text.</p>
+	<p>It's a good thing.</p>
+	<h2 id="one-shots">One-shots</h2>
+	<h3 id="stick-shoot">Stick Shoot</h3>
+	<p>Some text.</p>
+	<p>It's a good thing.</p>
+	<h3 id="the-box">The Box</h3>
+	<p>Some text.</p>
+	<p>It's a good thing.</p>
+	<h3 id="cave-escape">Cave Escape</h3>
+	<p>Some text.</p>
+	<p>It's a good thing.</p>
+</section>
+
+<script type="text/javascript" src="../src/js/gumshoe.js"></script>
+<script type="text/javascript">
+gumshoe.init({
+	activateAlso: function(domNode) {
+		/* for leaf nodes only (those I've marked as dropdown-item),
+		 * e.g:
+		 * <a class="dropdown-item" href="#invasion-3">Invasion 3</a>
+		 *
+		 * return the node which targets the _containing category_,
+		 * i.e:
+		 * <a class="nav-link dropdown-toggle" href="#invasion">Invasion</a>
+		 *
+		 * So, if you are viewing Invasion 1, Invasion 2 or Invasion 3:
+		 * This will highlight that game *and* the Invasion category.
+		 */ 
+		return domNode.classList.contains('dropdown-item')
+			&& domNode.parentNode
+			&& domNode.parentNode.parentNode
+			&& domNode.parentNode.parentNode.parentNode
+			&& domNode.parentNode.parentNode.parentNode.firstElementChild;
+	}
+});
+</script>
+
+<style type="text/css">
+p {
+	margin-bottom: 15em;
+}
+
+section {
+	display: block;
+	margin: 0 auto;
+	max-width: 400px;
+	padding: 0 16px 16px;
+}
+
+/** Sidebar styling influenced by https://jsfiddle.net/gableroux/S2SMK/ */
+.group {
+    background: yellow;
+    width: 200px;
+    height: 500px;
+}
+.group .subgroup {
+    background: orange;
+    width: 150px;
+    height: 200px;
+}
+.fixed {
+    position: fixed;
+}
+
+/* sidebar */
+.bs-docs-sidebar {
+    padding-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: absolute;
+}
+
+.bs-docs-sidebar ul {
+    padding-left: 0px;
+}
+
+/* all links */
+.bs-docs-sidebar a {
+    color: #999;
+    border-left: 2px solid transparent;
+    padding: 4px 20px;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+/* nested links */
+.bs-docs-sidebar .dropdown-item {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 30px;
+    font-size: 12px;
+}
+
+.bs-docs-sidebar ul, .bs-docs-sidebar li {
+	list-style-type: none;
+}
+
+/* active & hover links */
+.bs-docs-sidebar a.active,
+.bs-docs-sidebar a:hover, 
+.bs-docs-sidebar a:focus {
+    color: #563d7c;                 
+    text-decoration: none;
+    background-color: transparent;
+    border-left-color: #563d7c;
+}
+/* all active links */
+.bs-docs-sidebar .dropdown-toggle.active,
+.bs-docs-sidebar .dropdown-toggle.active:hover,
+.bs-docs-sidebar .dropdown-toggle.active:focus {
+    font-weight: 700;
+}
+/* nested active links */
+.bs-docs-sidebar .dropdown-item.active, 
+.bs-docs-sidebar .dropdown-item.active:hover,
+.bs-docs-sidebar .dropdown-item.active:focus {
+    font-weight: 500;
+}
+
+.bs-docs-sidebar .dropdown-menu {
+	display:none;
+}
+
+.bs-docs-sidebar .dropdown-toggle.active ~ .dropdown-menu {
+	display:block;
+}
+
+@media only screen and (max-width: 1160px) {
+    .bs-docs-sidebar {
+        display: none;
+    }
+}
+
+body {
+    position: relative;
+}
+</style>
+</body>
+</html>
