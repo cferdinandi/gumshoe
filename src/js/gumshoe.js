@@ -234,9 +234,10 @@
 			if ( currentNav.parent ) {
 				currentNav.parent.classList.remove( settings.activeClass );
 			}
-			currentNav.activateAlso
-			&& currentNav.activateAlso.classList
-			&& currentNav.activateAlso.classList.remove( settings.activeClass );
+			if ( currentNav.activateAlso &&
+				currentNav.activateAlso.classList ) {
+				currentNav.activateAlso.classList.remove( settings.activeClass );
+			}
 		}
 	};
 
@@ -255,9 +256,10 @@
 		if ( nav.parent ) {
 			nav.parent.classList.add( settings.activeClass );
 		}
-		nav.activateAlso
-		&& nav.activateAlso.classList
-		&& nav.activateAlso.classList.add( settings.activeClass );
+		if ( nav.activateAlso &&
+			nav.activateAlso.classList ) {
+			nav.activateAlso.classList.add( settings.activeClass );
+		}
 
 		settings.callback( nav ); // Callback after methods are run
 
