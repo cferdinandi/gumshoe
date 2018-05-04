@@ -207,7 +207,7 @@
 		// For each link, create an object of attributes and push to an array
 		forEach( navLinks, function (nav) {
 			if ( !nav.hash ) return;
-			var target = document.querySelector( nav.hash );
+			var target = document.querySelector( `[id="${decodeURIComponent(nav.hash.replace('#', ''))}"]` );
 			if ( !target ) return;
 			navs.push({
 				nav: nav,
