@@ -1,6 +1,6 @@
 /*!
- * gumshoe v3.5.0: A simple, framework-agnostic scrollspy script.
- * (c) 2017 Chris Ferdinandi
+ * gumshoejs v3.5.1: A simple, framework-agnostic scrollspy script.
+ * (c) 2018 Chris Ferdinandi
  * MIT License
  * http://github.com/cferdinandi/gumshoe
  */
@@ -22,7 +22,6 @@
 	//
 
 	var gumshoe = {}; // Object for public APIs
-	var supports = 'querySelector' in document && 'addEventListener' in root && 'classList' in document.createElement('_'); // Feature test
 	var navs = []; // Array for nav elements
 	var settings, eventTimeout, docHeight, header, headerHeight, currentNav, scrollEventDelay;
 
@@ -41,6 +40,10 @@
 	//
 	// Methods
 	//
+
+	var supports = function () {
+		return ('querySelector' in document && 'addEventListener' in root && 'classList' in document.createElement('_'));
+	};
 
 	/**
 	 * A simple forEach() implementation for Arrays, Objects and NodeLists.
@@ -390,7 +393,7 @@
 	gumshoe.init = function ( options ) {
 
 		// feature test
-		if ( !supports ) return;
+		if ( !supports() ) return;
 
 		// Destroy any existing initializations
 		gumshoe.destroy();
