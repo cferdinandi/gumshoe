@@ -1,5 +1,5 @@
 /*!
- * gumshoejs v3.5.1: A simple, framework-agnostic scrollspy script.
+ * gumshoejs v3.5.2: A simple, framework-agnostic scrollspy script.
  * (c) 2018 Chris Ferdinandi
  * MIT License
  * http://github.com/cferdinandi/gumshoe
@@ -352,8 +352,10 @@
 
 		// recalculate distances and then get currently active nav
 		eventTimeout = setTimeout((function() {
-			gumshoe.setDistances();
-			gumshoe.getCurrentNav();
+			if (gumshoe) {
+				gumshoe.setDistances();
+				gumshoe.getCurrentNav();
+			}
 		}), 66);
 
 	};

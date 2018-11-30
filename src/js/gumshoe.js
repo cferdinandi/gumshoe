@@ -345,8 +345,10 @@
 
 		// recalculate distances and then get currently active nav
 		eventTimeout = setTimeout(function() {
-			gumshoe.setDistances();
-			gumshoe.getCurrentNav();
+			if (gumshoe) {
+				gumshoe.setDistances();
+				gumshoe.getCurrentNav();
+			}
 		}, 66);
 
 	};
