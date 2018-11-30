@@ -1,5 +1,5 @@
 {
-  "name": "gumshoejs",
+  "name": "@festicket/gumshoejs",
   "version": "3.5.1",
   "description": "A simple, framework-agnostic scrollspy script.",
   "main": "./dist/js/gumshoe.min.js",
@@ -10,7 +10,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "http://github.com/cferdinandi/gumshoe"
+    "url": "http://github.com/festicket/gumshoe"
   },
   "devDependencies": {
     "del": "^2.2.0",
