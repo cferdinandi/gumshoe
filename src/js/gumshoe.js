@@ -365,15 +365,17 @@
 
 				eventTimeout = null; // Reset timeout
 
-				// If scroll event, get currently active nav
-				if ( event.type === 'scroll' ) {
-					gumshoe.getCurrentNav();
-				}
-
-				// If resize event, recalculate distances and then get currently active nav
-				if ( event.type === 'resize' ) {
-					gumshoe.setDistances();
-					gumshoe.getCurrentNav();
+				if (gumshoe) {
+					// If scroll event, get currently active nav
+					if ( event.type === 'scroll' ) {
+						gumshoe.getCurrentNav();
+					}
+	
+					// If resize event, recalculate distances and then get currently active nav
+					if ( event.type === 'resize' ) {
+						gumshoe.setDistances();
+						gumshoe.getCurrentNav();
+					}
 				}
 
 			}, 66);
