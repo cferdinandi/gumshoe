@@ -1,6 +1,6 @@
 {
   "name": "@festicket/gumshoejs",
-  "version": "3.5.1",
+  "version": "3.5.5",
   "description": "A simple, framework-agnostic scrollspy script.",
   "main": "./dist/js/gumshoe.min.js",
   "author": {
