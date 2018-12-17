@@ -6,6 +6,14 @@ A simple, framework-agnostic scrollspy script. Gumshoe works great with [Smooth 
 [Download Gumshoe](https://github.com/cferdinandi/gumshoe/archive/master.zip) / [View the demo](http://cferdinandi.github.io/gumshoe/)
 
 
+<hr>
+
+### Want to learn how to write your own vanilla JS plugins? Check out ["The Vanilla JS Guidebook"](https://gomakethings.com/vanilla-js-guidebook/) and level-up as a web developer. 🚀
+
+<hr>
+
+
+
 ## Getting Started
 
 Compiled and production-ready code can be found in the `dist` directory. The `src` directory contains development code.
@@ -31,7 +39,7 @@ Compiled and production-ready code can be found in the `dist` directory. The `sr
 
 Add the `[data-gumshoe]` attribute to the navigation list that Gumshoe should watch.
 
-If you're using a fixed header, add the `[data-gumshoe-header]` attribute and Gumshoe will automatically offset it's calculations based on the header's height and distance from the top of the page.  If you have multiple fixed headers, add `[data-gumshoe-header]` to the last one in the markup.
+If you're using a fixed header, add the `[data-gumshoe-header]` attribute and Gumshoe will automatically offset its calculations based on the header's height and distance from the top of the page.  If you have multiple fixed headers, add `[data-gumshoe-header]` to the last one in the markup.
 
 ### 3. Initialize Gumshoe.
 
@@ -89,10 +97,13 @@ gumshoe.init({
 	selectorHeader: '[data-gumshoe-header]', // Fixed header selector (must use a valid CSS selector)
 	container: window, // The element to spy on scrolling in (must be a valid DOM Node)
 	offset: 0, // Distance in pixels to offset calculations
-	activeClass: 'active', // Class to apply to active navigation link and it's parent list item
+	activeClass: 'active', // Class to apply to active navigation link and its parent list item
+	scrollDelay: false, // Wait until scrolling has stopped before updating the navigation
 	callback: function (nav) {} // Callback to run after setting active link
 });
 ```
+
+***Note:*** *The `scrollDelay` option can be useful in preventing the elements of your navigation from being highlighted and unhighlighted in rapid succession when quickly scrolling (e.g., with [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)) through a page with many navigation items (e.g. a long document with a table of contents in the sidebar).*
 
 ### Use Gumshoe events in your own scripts
 

@@ -1,8 +1,8 @@
 /*!
- * gumshoe v3.3.1: A simple, framework-agnostic scrollspy script.
- * (c) 2016 Chris Ferdinandi
+ * @festicket/gumshoejs v3.5.6: A simple, framework-agnostic scrollspy script.
+ * (c) 2018 Chris Ferdinandi
  * MIT License
- * http://github.com/cferdinandi/gumshoe
+ * http://github.com/festicket/gumshoe
  */
 
 (function (root, factory) {
@@ -22,9 +22,8 @@
 	//
 
 	var gumshoe = {}; // Object for public APIs
-	var supports = 'querySelector' in document && 'addEventListener' in root && 'classList' in document.createElement('_'); // Feature test
 	var navs = []; // Array for nav elements
-	var settings, eventTimeout, docHeight, header, headerHeight, currentNav;
+	var settings, eventTimeout, docHeight, header, headerHeight, currentNav, scrollEventDelay;
 
 	// Default settings
 	var defaults = {
@@ -33,6 +32,7 @@
 		container: root,
 		offset: 0,
 		activeClass: 'active',
+		scrollDelay: false,
 		callback: function () {}
 	};
 
@@ -40,6 +40,10 @@
 	//
 	// Methods
 	//
+
+	var supports = function () {
+		return ('querySelector' in document && 'addEventListener' in root && 'classList' in document.createElement('_'));
+	};
 
 	/**
 	 * A simple forEach() implementation for Arrays, Objects and NodeLists.
@@ -162,8 +166,8 @@
 		return (
 			distance.top >= 0 &&
 			distance.left >= 0 &&
-			distance.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-			distance.right <= (window.innerWidth || document.documentElement.clientWidth)
+			distance.bottom <= (root.innerHeight || document.documentElement.clientHeight) &&
+			distance.right <= (root.innerWidth || document.documentElement.clientWidth)
 		);
 	};
 
@@ -271,28 +275,29 @@
 	 * @returns {Object} The current nav data.
 	 */
 	gumshoe.getCurrentNav = function () {
+		if (navs.length > 0) {
+			// Get current position from top of the document
+			var position = root.pageYOffset;
 
-		// Get current position from top of the document
-		var position = root.pageYOffset;
-
-		// If at the bottom of the page and last section is in the viewport, activate the last nav
-		if ( (root.innerHeight + position) >= docHeight && isInViewport( navs[0].target ) ) {
-			activateNav( navs[0] );
-			return navs[0];
-		}
-
-		// Otherwise, loop through each nav until you find the active one
-		for (var i = 0, len = navs.length; i < len; i++) {
-			var nav = navs[i];
-			if ( nav.distance <= position ) {
-				activateNav( nav );
-				return nav;
+			// If at the bottom of the page and last section is in the viewport, activate the last nav
+			if ( (root.innerHeight + position) >= docHeight && isInViewport( navs[0].target ) ) {
+				activateNav( navs[0] );
+				return navs[0];
 			}
-		}
 
-		// If no active nav is found, deactivate the current nav
-		deactivateCurrentNav();
-		settings.callback();
+			// Otherwise, loop through each nav until you find the active one
+			for (var i = 0, len = navs.length; i < len; i++) {
+				var nav = navs[i];
+				if ( nav.distance <= position ) {
+					activateNav( nav );
+					return nav;
+				}
+			}
+
+			// If no active nav is found, deactivate the current nav
+			deactivateCurrentNav();
+			settings.callback();
+		}
 
 	};
 
@@ -332,6 +337,25 @@
 		header = null;
 		headerHeight = null;
 		currentNav = null;
+		scrollEventDelay = null;
+
+	};
+
+	/**
+	 * Run functions after scrolling stops
+	 * @param  {[type]} event [description]
+	 * @return {[type]}       [description]
+	 */
+	var scrollStop = function (event) {
+
+		// Clear our timeout throughout the scroll
+		window.clearTimeout( eventTimeout );
+
+		// recalculate distances and then get currently active nav
+		eventTimeout = setTimeout((function() {
+			gumshoe.setDistances();
+			gumshoe.getCurrentNav();
+		}), 66);
 
 	};
 
@@ -370,7 +394,7 @@
 	gumshoe.init = function ( options ) {
 
 		// feature test
-		if ( !supports ) return;
+		if ( !supports() ) return;
 
 		// Destroy any existing initializations
 		gumshoe.destroy();
@@ -390,7 +414,11 @@
 
 		// Listen for events
 		settings.container.addEventListener('resize', eventThrottler, false);
-		settings.container.addEventListener('scroll', eventThrottler, false);
+		if ( settings.scrollDelay ) {
+			settings.container.addEventListener('scroll', scrollStop, false);
+		} else {
+			settings.container.addEventListener('scroll', eventThrottler, false);
+		}
 
 	};
 
