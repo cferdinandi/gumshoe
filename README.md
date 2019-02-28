@@ -1,17 +1,14 @@
 # Gumshoe [![Build Status](https://travis-ci.org/cferdinandi/gumshoe.svg)](https://travis-ci.org/cferdinandi/gumshoe)
-A simple, framework-agnostic scrollspy script. Gumshoe works great with [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll).
+A lightweight script to animate scrolling to anchor links. Gumshoe works great with [Smooth Scroll](https://github.com/cferdinandi/gumshoe).
 
-*See Gumshoe in action on Apple's [Swift.org website](https://swift.org/).*
-
-[Download Gumshoe](https://github.com/cferdinandi/gumshoe/archive/master.zip) / [View the demo](http://cferdinandi.github.io/gumshoe/)
+**[View the Demo on CodePen &rarr;](#)**
 
 
 <hr>
 
-### Want to learn how to write your own vanilla JS plugins? Check out ["The Vanilla JS Guidebook"](https://gomakethings.com/vanilla-js-guidebook/) and level-up as a web developer. 🚀
+### Want to learn how to write your own vanilla JS plugins? Check out my [Vanilla JS Pocket Guides](https://vanillajsguides.com/) or join the [Vanilla JS Academy](https://vanillajsacademy.com) and level-up as a web developer. 🚀
 
 <hr>
-
 
 
 ## Getting Started
@@ -20,46 +17,250 @@ Compiled and production-ready code can be found in the `dist` directory. The `sr
 
 ### 1. Include Gumshoe on your site.
 
+There are two versions of Gumshoe: the standalone version, and one that comes preloaded with polyfills for `closest()` and `CustomEvent()`, which are only supported in newer browsers.
+
+If you're including your own polyfills or don't want to enable this feature for older browsers, use the standalone version. Otherwise, use the version with polyfills.
+
+**Direct Download**
+
+You can [download the files directly from GitHub](https://github.com/cferdinandi/gumshoe/archive/master.zip).
+
 ```html
-<script src="dist/js/gumshoe.js"></script>
+<script src="path/to/gumshoe.polyfills.min.js"></script>
+```
+
+**CDN**
+
+You can also use the [jsDelivr CDN](https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe/dist/). I recommend linking to a specific version number or version range to prevent major updates from breaking your site. Gumshoe uses semantic versioning.
+
+```html
+<!-- Always get the latest version -->
+<!-- Not recommended for production sites! -->
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe/dist/gumshoe.polyfills.min.js"></script>
+
+<!-- Get minor updates and patch fixes within a major version -->
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4/dist/gumshoe.polyfills.min.js"></script>
+
+<!-- Get patch fixes within a minor version -->
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0/dist/gumshoe.polyfills.min.js"></script>
+
+<!-- Get a specific version -->
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0.0/dist/gumshoe.polyfills.min.js"></script>
 ```
 
 ### 2. Add the markup to your HTML.
 
+The only thing Gumshoe needs to work is a list of anchor links. They can be ordered or unordered, inline or unstyled, or even nested.
+
 ```html
-<nav data-gumshoe-header>
-	<ul data-gumshoe>
-		<li class="active"><a class="active" href="#eenie">Eenie</a></li>
-		<li><a href="#meanie">Meanie</a></li>
-		<li><a href="#minnie">Minnie</a></li>
-		<li><a href="#moe">Moe</a></li>
-	</ul>
-</nav>
+<ul id="my-awesome-nav">
+	<li><a href="#eenie">Eenie</a></li>
+	<li><a href="#meenie">Meenie</a></li>
+	<li><a href="#miney">Miney</a></li>
+	<li><a href="#mo">Mo</a></li>
+</ul>
 ```
-
-Add the `[data-gumshoe]` attribute to the navigation list that Gumshoe should watch.
-
-If you're using a fixed header, add the `[data-gumshoe-header]` attribute and Gumshoe will automatically offset its calculations based on the header's height and distance from the top of the page.  If you have multiple fixed headers, add `[data-gumshoe-header]` to the last one in the markup.
 
 ### 3. Initialize Gumshoe.
 
+In the footer of your page, after the content, initialize Gumshoe by passing in a selector for the navigation links that should be detected as the user scrolls.
+
 ```html
 <script>
-	gumshoe.init();
+	var spy = new Gumshoe('#my-awesome-nav a');
 </script>
 ```
 
-In the footer of your page, after the content, initialize Gumshoe. And that's it, you're done. Nice work!
+**[Here's a demo.](#)**
+
+### 4. Add styling.
+
+Gumshoe adds the `.active` class to the list item (`<li></li>`) and content for the active link, but does not include any styling.
+
+Add styles to your CSS as desired. And that's it, you're done. Nice work!
+
+```css
+#my-awesome-nav a.active {
+	font-weight: bold;
+}
+```
+
+*__Note:__ you can customize the class names with [user options](#options-and-settings).*
 
 
 
-## Installing with Package Managers
+## Nested navigation
 
-You can install Gumshoe with your favorite package manager.
+If you have a nested navigation menu with multiple levels, Gumshoe can also apply an `.active` class to the parent list items of the currently active link.
 
-* **NPM:** `npm install cferdinandi/gumshoe`
-* **Bower:** `bower install https://github.com/cferdinandi/gumshoe.git`
-* **Component:** `component install cferdinandi/gumshoe`
+```html
+<ul id="my-awesome-nav">
+	<li><a href="#eenie">Eenie</a></li>
+	<li>
+		<a href="#meenie">Meenie</a>
+		<ul>
+			<li><a href="#hickory">Hickory</a></li>
+			<li><a href="#dickory">Dickory</a></li>
+			<li><a href="#doc">Doc</a></li>
+		</ul>
+	</li>
+	<li><a href="#miney">Miney</a></li>
+	<li><a href="#mo">Mo</a></li>
+</ul>
+```
+
+Set `nested` to `true` when instantiating Gumshoe. You can also customize the class name.
+
+```js
+var spy = new Gumshoe('#my-awesome-nav a', {
+	nested: true,
+	nestedClass: 'active-parent'
+});
+```
+
+
+## Catching reflows
+
+If the content that's linked to by your navigation has different layouts at different viewports, Gumshoe will need to detect these changes and update some calculations behind-the-scenes.
+
+Set `reflow` to `true` to enable this (it's off by default).
+
+```js
+var spy = new Gumshoe('#my-awesome-nav a', {
+	reflow: true
+});
+```
+
+
+## Accounting for fixed headers
+
+If you have a fixed header on your page, you may want to offset when a piece of content is considered "active."
+
+The `offset` user setting accepts either a number, or a function that returns a number. If you need to dynamically calculate dimensions, a function is the preferred method.
+
+Here's an example that automatically calculates a header's height and offsets by that amount.
+
+```js
+var spy = new Gumshoe('#my-awesome-nav a', {
+	offset: function () {
+
+		// Get the header
+		var header = document.querySelector('#my-header');
+
+		// Get its computed styles
+		var computed = window.getComputedStyle(header);
+
+		// Return the headers height + margins + padding
+		return parseFloat(computed.height) + parseFloat(computed.marginTop) + parseFloat(computed.marginBottom) + parseFloat(computed.paddingTop) + parseFloat(computed.paddingBottom);
+
+	}
+});
+```
+
+
+
+## API
+
+Gumshoe includes smart defaults and works right out of the box. But if you want to customize things, it also has a robust API that provides multiple ways for you to adjust the default options and settings.
+
+### Options and Settings
+
+You can pass options into Gumshoe when instantiating.
+
+```javascript
+var spy = new Gumshoe('#my-awesome-nav a', {
+
+	// Active classes
+	navClass: 'active', // applied to the nav list item
+	contentClass: 'active', // applied to the content
+
+	// Nested navigation
+	nested: false, // if true, add classes to parents of active link
+	nestedClass: 'active', // applied to the parent items
+
+	// Offset & reflow
+	offset: 0, // how far from the top of the page to activate a content area
+	reflow: false, // if true, listen for reflows
+
+	// Event support
+	events: true // if true, emit custom events
+
+});
+```
+
+### Custom Events
+
+Gumshoe emits two custom events:
+
+- `gumshoeActivate` is emitted when a link is activated.
+- `gumshoeDeactivate` is emitted when a link is deactivated.
+
+Both events are emitted on the list item and bubble up. You can listen for them with the `addEventListener()` method. The `event.detail` object includes the `link` and `content` elements, and the `settings` for the current instantiation.
+
+```js
+// Listen for scroll events
+document.addEventListener('gumshoeActivate', function (event) {
+
+	// The list item
+	var li = event.target;
+
+	// The link
+	var link = event.detail.link;
+
+	// The content
+	var content = event.detail.content;
+
+}, false);
+```
+
+### Methods
+
+Gumshoe also exposes several public methods.
+
+#### setup()
+Setups all of the calculations Gumshoe needs behind-the-scenes. If you dynamically add navigation items to the DOM after Gumshoe is instantiated, you can run this method to update the calculations.
+
+**Example**
+
+```javascript
+var spy = new Gumshoe('#my-awesome-nav a');
+spy.setup();
+```
+
+#### detect()
+Activate the navigation link that's content is currently in the viewport.
+
+**Example**
+
+```javascript
+var spy = new Gumshoe('#my-awesome-nav a');
+spy.detect();
+```
+
+#### destroy()
+Destroy the current instantiation of Gumshoe.
+
+**Example**
+
+```javascript
+var spy = new Gumshoe('#my-awesome-nav a');
+spy.destroy();
+```
+
+#### init()
+Reinitialize Gumshoe. This is called automatically when you instantiate your `new Gumshoe` object, but can be used to reinitialize your instance after running `destroy()`.
+
+**Example**
+
+```javascript
+var spy = new Gumshoe('#my-awesome-nav a');
+spy.destroy();
+
+// Some time later...
+spy.init({
+	// New options
+});
+```
 
 
 
@@ -79,68 +280,41 @@ Make sure these are installed first.
 2. Run `npm install` to install required files.
 3. When it's done installing, run one of the task runners to get going:
 	* `gulp` manually compiles files.
-	* `gulp watch` automatically compiles files and applies changes using [LiveReload](http://livereload.com/).
+	* `gulp watch` automatically compiles files when changes are made and applies changes using [LiveReload](http://livereload.com/).
 
 
 
-## Options and Settings
 
-Gumshoe includes smart defaults and works right out of the box. But if you want to customize things, it also has a robust API that provides multiple ways for you to adjust the default options and settings.
+## Migrating to Gumshoe 4 from Older Versions
 
-### Global Settings
+Gumshoe 4 is a ground-up rewrite.
 
-You can pass options and callbacks into Gumshoe through the `init()` function:
+### New Features
 
-```javascript
-gumshoe.init({
-	selector: '[data-gumshoe] a', // Default link selector (must use a valid CSS selector)
-	selectorHeader: '[data-gumshoe-header]', // Fixed header selector (must use a valid CSS selector)
-	container: window, // The element to spy on scrolling in (must be a valid DOM Node)
-	offset: 0, // Distance in pixels to offset calculations
-	activeClass: 'active', // Class to apply to active navigation link and its parent list item
-	scrollDelay: false, // Wait until scrolling has stopped before updating the navigation
-	callback: function (nav) {} // Callback to run after setting active link
-});
-```
+- Multiple instantiations can be run with different settings for each.
+- An active class is now added to the content as well.
+- Nested navigation is now supported.
+- Offsets can be dynamically calculated instead of set just once at initialization.
+- Special and non-Roman characters can now be used in anchor links and IDs.
+- Custom events provide a more flexible way to react to DOM changes.
 
-***Note:*** *The `scrollDelay` option can be useful in preventing the elements of your navigation from being highlighted and unhighlighted in rapid succession when quickly scrolling (e.g., with [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)) through a page with many navigation items (e.g. a long document with a table of contents in the sidebar).*
+### Breaking Changes
 
-### Use Gumshoe events in your own scripts
-
-You can also call Gumshoe events in your own scripts.
-
-#### setDistances()
-Recalculate the height of document, the height of the fixed header, and how far navigation targets are from the top of the document.
-
-```javascript
-gumshoe.setDistances();
-```
-
-#### getCurrentNav()
-Determine which navigation element is currently active and add active classes.
-
-```javascript
-gumshoe.getCurrentNav();
-```
-
-#### destroy()
-Destroy the current `gumshoe.init()`. This is called automatically during the init function to remove any existing initializations.
-
-```javascript
-gumshoe.destroy();
-```
+- Gumshoe must now be instantiated as a new object (`new Gumshoe()`) instead of being initialized `gumshoe.init()`.
+- Callback methods have been removed in favor of events.
+- Automatic header offsetting has been removed.
 
 
 
 ## Browser Compatibility
 
-Gumshoe works in all modern browsers, and IE 10 and above. You can extend browser support back to IE 9 with the [classList.js polyfill](https://github.com/eligrey/classList.js/).
+Gumshoe works in all modern browsers, and IE 9 and above.
 
+### Polyfills
 
+Support back to IE9 requires polyfills for `closest()` and `CustomEvent()`. Without them, support starts with Edge.
 
-## How to Contribute
-
-Please review the  [contributing guidelines](CONTRIBUTING.md).
+Use the included polyfills version of Gumshoe, or include your own.
 
 
 
