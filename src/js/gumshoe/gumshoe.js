@@ -134,7 +134,7 @@
 	var isInViewport = function (elem, settings) {
 		var bounds = elem.getBoundingClientRect();
 		var offset = getOffset(settings);
-		return parseFloat(bounds.top) <= offset && parseFloat(bounds.bottom) > offset;
+		return parseInt(bounds.top, 10) <= offset && parseInt(bounds.bottom, 10) > offset;
 	};
 
 	/**
