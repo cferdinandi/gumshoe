@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title>Gumshoe</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<style type="text/css">
+			html {
+				overflow-y: auto;
+				scroll-behavior: smooth;
+			}
+
+			/*  Sets body width */
+			.container {
+				max-width: 90em;
+				width: 88%;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+			/**
+			 * Grid
+			 */
+			.grid {
+				display: grid;
+				grid-gap: 2em;
+				grid-template-columns: 30% 70%;
+			}
+
+			#my-awesome-nav {
+				position: fixed;
+			}
+
+			#my-awesome-nav a {
+				display: inline-block;
+				padding: 0.25em 0.5em;
+			}
+
+			#my-awesome-nav li.active > a {
+				background-color: black;
+			}
+
+			#my-awesome-nav li.active > a {
+				color: white;
+			}
+
+			/**
+			 * Sections
+			 */
+			.section {
+				color: #ffffff;
+				height: 95vh;
+				margin: 0;
+				padding: 2em;
+			}
+
+			#eenie {
+				background-color: #0088cc;
+			}
+
+			#meenie {
+				background-color: rebeccapurple;
+			}
+
+			#miney {
+				background-color: #272727;
+			}
+
+			#mo {
+				background-color: #f42b37;
+			}
+		</style>
+	</head>
+
+	<body id="top">
+
+		<div class="container">
+			<div class="grid">
+				<nav>
+					<ul id="my-awesome-nav">
+						<li><a href="#eenie">Eenie</a></li>
+						<li>
+							<a href="#meenie">Meenie</a>
+							<ul>
+								<li><a href="#hickory">Hickory</a></li>
+								<li><a href="#dickory">Dickory</a></li>
+								<li><a href="#doc">Doc</a></li>
+							</ul>
+						</li>
+						<li><a href="#miney">Miney</a></li>
+						<li><a href="#mo">Mo</a></li>
+					</ul>
+				</nav>
+				<main>
+					<div class="section" id="eenie">
+						Eenie...
+					</div>
+
+					<div class="section" id="meenie">
+						Meenie...
+						<p id="hickory">
+							Hickory...
+							.<br>.<br>.<br>.<br>.<br>.<br>.
+						</p>
+						<p id="dickory">
+							Dickory...
+							.<br>.<br>.<br>.<br>.<br>.<br>.
+						</p>
+						<p id="doc">
+							Doc...
+							.<br>.<br>.<br>.<br>.<br>.<br>.
+						</p>
+					</div>
+
+					<div class="section" id="miney">
+						Miney...
+					</div>
+
+					<div class="section" id="mo">
+						Mo...
+					</div>
+
+					<p><a data-scroll href="#top">Back to the top</a></p>
+				</main>
+			</div>
+		</div>
+
+		<!-- Javascript -->
+		<script src="dist/gumshoe.js"></script>
+		<script>
+			var spy = new Gumshoe('#my-awesome-nav a', {
+				nested: true
+			});
+		</script>
+
+
+	</body>
+</html>
