@@ -1,7 +1,7 @@
 # Gumshoe [![Build Status](https://travis-ci.org/cferdinandi/gumshoe.svg)](https://travis-ci.org/cferdinandi/gumshoe)
 A lightweight script to animate scrolling to anchor links. Gumshoe works great with [Smooth Scroll](https://github.com/cferdinandi/gumshoe).
 
-**[View the Demo on CodePen &rarr;](#)**
+**[View the Demo on CodePen &rarr;](https://codepen.io/cferdinandi/pen/aMvxKr)**
 
 
 <hr>
@@ -71,7 +71,7 @@ In the footer of your page, after the content, initialize Gumshoe by passing in 
 </script>
 ```
 
-**[Here's a demo.](#)**
+**[Here's a demo.](https://codepen.io/cferdinandi/pen/aMvxKr)**
 
 ### 4. Add styling.
 
@@ -118,6 +118,8 @@ var spy = new Gumshoe('#my-awesome-nav a', {
 });
 ```
 
+**[Try nested navigation on CodePen &rarr;](https://codepen.io/cferdinandi/pen/JzYVxj)**
+
 
 ## Catching reflows
 
@@ -156,6 +158,8 @@ var spy = new Gumshoe('#my-awesome-nav a', {
 	}
 });
 ```
+
+**[Try using an offset on CodePen &rarr;](https://codepen.io/cferdinandi/pen/eXpLqo)**
 
 
 

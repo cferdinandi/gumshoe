@@ -33,11 +33,16 @@
 				position: fixed;
 			}
 
-			#my-awesome-nav li.active {
+			#my-awesome-nav a {
+				display: inline-block;
+				padding: 0.25em 0.5em;
+			}
+
+			#my-awesome-nav li.active > a {
 				background-color: black;
 			}
 
-			#my-awesome-nav li.active a {
+			#my-awesome-nav li.active > a {
 				color: white;
 			}
 
@@ -76,7 +81,14 @@
 				<nav>
 					<ul id="my-awesome-nav">
 						<li><a href="#eenie">Eenie</a></li>
-						<li><a href="#meenie">Meenie</a></li>
+						<li>
+							<a href="#meenie">Meenie</a>
+							<ul>
+								<li><a href="#hickory">Hickory</a></li>
+								<li><a href="#dickory">Dickory</a></li>
+								<li><a href="#doc">Doc</a></li>
+							</ul>
+						</li>
 						<li><a href="#miney">Miney</a></li>
 						<li><a href="#mo">Mo</a></li>
 					</ul>
@@ -88,6 +100,18 @@
 
 					<div class="section" id="meenie">
 						Meenie...
+						<p id="hickory">
+							Hickory...
+							.<br>.<br>.<br>.<br>.<br>.<br>.
+						</p>
+						<p id="dickory">
+							Dickory...
+							.<br>.<br>.<br>.<br>.<br>.<br>.
+						</p>
+						<p id="doc">
+							Doc...
+							.<br>.<br>.<br>.<br>.<br>.<br>.
+						</p>
 					</div>
 
 					<div class="section" id="miney">
@@ -106,7 +130,9 @@
 		<!-- Javascript -->
 		<script src="dist/gumshoe.js"></script>
 		<script>
-			var spy = new Gumshoe('#my-awesome-nav a');
+			var spy = new Gumshoe('#my-awesome-nav a', {
+				nested: true
+			});
 		</script>
 
 

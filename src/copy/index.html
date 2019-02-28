@@ -12,59 +12,32 @@
 				scroll-behavior: smooth;
 			}
 
-			img, audio, video, canvas {
-				max-width: 100%;
-				height: auto;
-			}
-
-			/**
-			 * Offset fixed header
-			 */
-			body {
-				padding-top: 150px;
-			}
-
 			/*  Sets body width */
 			.container {
-				max-width: 40em;
+				max-width: 90em;
 				width: 88%;
 				margin-left: auto;
 				margin-right: auto;
 			}
 
 			/**
-			 * Create fixed header
+			 * Grid
 			 */
-			.fixed-header {
+			.grid {
+				display: grid;
+				grid-gap: 2em;
+				grid-template-columns: 30% 70%;
+			}
+
+			#my-awesome-nav {
 				position: fixed;
-				top: 0;
-				left: 0;
-				background-color: #f7f7f7;
-				width: 100%;
 			}
 
-			/**
-			 * Display lists on a single line.
-			 */
-			.list-inline {
-				list-style: none;
-				margin-left: -0.5em;
-				margin-right: -0.5em;
-				padding: 0;
-			}
-
-			.list-inline li {
-				display: inline-block;
-				margin-left: 0.5em;
-				margin-right: 0.5em;
-				padding: 0.25em 0.5em;
-			}
-
-			.list-inline li.active {
+			#my-awesome-nav li.active {
 				background-color: black;
 			}
 
-			.list-inline li.active a {
+			#my-awesome-nav li.active a {
 				color: white;
 			}
 
@@ -82,15 +55,15 @@
 				background-color: #0088cc;
 			}
 
-			#meanie {
+			#meenie {
 				background-color: rebeccapurple;
 			}
 
-			#minnie {
+			#miney {
 				background-color: #272727;
 			}
 
-			#moe {
+			#mo {
 				background-color: #f42b37;
 			}
 		</style>
@@ -98,54 +71,42 @@
 
 	<body id="top">
 
-		<nav data-gumshoe-header data-scroll-header class="fixed-header">
-			<div class="container">
-				<h1>Gumshoe</h1>
-				<p><a href="https://github.com/cferdinandi/gumshoe">GitHub</a></p>
-				<ul data-gumshoe class="list-inline">
-					<li><a data-scroll href="#eenie">Eenie</a></li>
-					<li><a data-scroll href="#meanie">Meanie</a></li>
-					<li><a data-scroll href="#minnie">Minnie</a></li>
-					<li><a data-scroll href="#moe">Moe</a></li>
-				</ul>
+		<div class="container">
+			<div class="grid">
+				<nav>
+					<ul id="my-awesome-nav">
+						<li><a href="#eenie">Eenie</a></li>
+						<li><a href="#meenie">Meenie</a></li>
+						<li><a href="#miney">Miney</a></li>
+						<li><a href="#mo">Mo</a></li>
+					</ul>
+				</nav>
+				<main>
+					<div class="section" id="eenie">
+						Eenie...
+					</div>
+
+					<div class="section" id="meenie">
+						Meenie...
+					</div>
+
+					<div class="section" id="miney">
+						Miney...
+					</div>
+
+					<div class="section" id="mo">
+						Mo...
+					</div>
+
+					<p><a data-scroll href="#top">Back to the top</a></p>
+				</main>
 			</div>
-		</nav>
-
-		<main class="container">
-
-			<section class="content">
-
-				<p class="section" id="eenie">
-					Eenie...
-				</p>
-
-				<p class="section" id="meanie">
-					Meanie...
-				</p>
-
-				<p class="section" id="minnie">
-					Minnie...
-				</p>
-
-
-				<p class="section" id="moe">
-					Moe...
-				</p>
-
-				<p><a data-scroll href="#top">Back to the top</a></p>
-			</section>
-		</main>
+		</div>
 
 		<!-- Javascript -->
 		<script src="dist/gumshoe.js"></script>
 		<script>
-			var spy = new Gumshoe('[data-gumshoe] > li > a', {
-				offset: function () {
-					var header = document.querySelector('[data-gumshoe-header]');
-					var computed = window.getComputedStyle(header);
-					return parseFloat(computed.height) + parseFloat(computed.marginTop) + parseFloat(computed.marginBottom) + parseFloat(computed.paddingTop) + parseFloat(computed.paddingBottom);
-				}
-			});
+			var spy = new Gumshoe('#my-awesome-nav a');
 		</script>
 
 

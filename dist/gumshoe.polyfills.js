@@ -207,7 +207,7 @@ if (!Element.prototype.closest) {
 		if (!settings.nested) return;
 
 		// Get the parent navigation
-		var li = nav.closest('li');
+		var li = nav.parentNode.closest('li');
 		if (!li) return;
 
 		// Remove the active class
@@ -260,7 +260,7 @@ if (!Element.prototype.closest) {
 		if (!settings.nested) return;
 
 		// Get the parent navigation
-		var li = nav.closest('li');
+		var li = nav.parentNode.closest('li');
 		if (!li) return;
 
 		// Add the active class
