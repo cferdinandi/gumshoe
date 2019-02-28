@@ -71,8 +71,6 @@ In the footer of your page, after the content, initialize Gumshoe by passing in 
 </script>
 ```
 
-**[Here's a demo.](https://codepen.io/cferdinandi/pen/aMvxKr)**
-
 ### 4. Add styling.
 
 Gumshoe adds the `.active` class to the list item (`<li></li>`) and content for the active link, but does not include any styling.
@@ -84,6 +82,8 @@ Add styles to your CSS as desired. And that's it, you're done. Nice work!
 	font-weight: bold;
 }
 ```
+
+**[View a Demo on CodePen &rarr;](https://codepen.io/cferdinandi/pen/aMvxKr)**
 
 *__Note:__ you can customize the class names with [user options](#options-and-settings).*
 
