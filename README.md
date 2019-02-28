@@ -202,7 +202,7 @@ Gumshoe emits two custom events:
 Both events are emitted on the list item and bubble up. You can listen for them with the `addEventListener()` method. The `event.detail` object includes the `link` and `content` elements, and the `settings` for the current instantiation.
 
 ```js
-// Listen for scroll events
+// Listen for activate events
 document.addEventListener('gumshoeActivate', function (event) {
 
 	// The list item
