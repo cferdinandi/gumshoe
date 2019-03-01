@@ -143,9 +143,10 @@ The `offset` user setting accepts either a number, or a function that returns a 
 Here's an example that automatically calculates a header's height and offsets by that amount.
 
 ```js
-// Get the header (once)
+// Get the header
 var header = document.querySelector('#my-header');
 
+// Initialize Gumshoe
 var spy = new Gumshoe('#my-awesome-nav a', {
 	offset: function () {
 		return header.getBoundingClientRect().height;
