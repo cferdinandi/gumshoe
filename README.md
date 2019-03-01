@@ -1,5 +1,5 @@
 # Gumshoe [![Build Status](https://travis-ci.org/cferdinandi/gumshoe.svg)](https://travis-ci.org/cferdinandi/gumshoe)
-A lightweight script to animate scrolling to anchor links. Gumshoe works great with [Smooth Scroll](https://github.com/cferdinandi/gumshoe).
+A lightweight script to animate scrolling to anchor links. Gumshoe works great with [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll).
 
 **[View the Demo on CodePen &rarr;](https://codepen.io/cferdinandi/pen/aMvxKr)**
 
