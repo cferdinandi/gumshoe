@@ -1,5 +1,5 @@
 /*!
- * gumshoejs v5.0.0
+ * gumshoejs v5.0.1
  * A simple, framework-agnostic scrollspy script.
  * (c) 2019 Chris Ferdinandi
  * MIT License
