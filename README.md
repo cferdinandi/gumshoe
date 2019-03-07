@@ -3,6 +3,7 @@ A simple vanilla JS scrollspy script. Gumshoe works great with [Smooth Scroll](h
 
 **[View the Demo on CodePen &rarr;](https://codepen.io/cferdinandi/pen/aMvxKr)**
 
+[Getting Started](#getting-started) | [Nested Navigation](#nested-navigation) | [Reflows](#catching-reflows) | [Fixed Headers](#accounting-for-fixed-headers) | [API](#api) | [What's new?](#whats-new) | [Browser Compatibility](#browser-compatibility) | [License](#license)
 
 <hr>
 
@@ -246,45 +247,10 @@ var spy = new Gumshoe('#my-awesome-nav a');
 spy.destroy();
 ```
 
-#### init()
-Reinitialize Gumshoe. This is called automatically when you instantiate your `new Gumshoe` object, but can be used to reinitialize your instance after running `destroy()`.
-
-**Example**
-
-```javascript
-var spy = new Gumshoe('#my-awesome-nav a');
-spy.destroy();
-
-// Some time later...
-spy.init({
-	// New options
-});
-```
 
 
 
-## Working with the Source Files
-
-If you would prefer, you can work with the development code in the `src` directory using the included [Gulp build system](http://gulpjs.com/). This compiles, lints, and minifies code.
-
-### Dependencies
-Make sure these are installed first.
-
-* [Node.js](http://nodejs.org)
-* [Gulp](http://gulpjs.com) `sudo npm install -g gulp`
-
-### Quick Start
-
-1. In bash/terminal/command line, `cd` into your project directory.
-2. Run `npm install` to install required files.
-3. When it's done installing, run one of the task runners to get going:
-	* `gulp` manually compiles files.
-	* `gulp watch` automatically compiles files when changes are made and applies changes using [LiveReload](http://livereload.com/).
-
-
-
-
-## Migrating to Gumshoe 4 from Older Versions
+## What's new?
 
 Gumshoe 4 is a ground-up rewrite.
 
@@ -302,6 +268,7 @@ Gumshoe 4 is a ground-up rewrite.
 - Gumshoe must now be instantiated as a new object (`new Gumshoe()`) instead of being initialized `gumshoe.init()`.
 - Callback methods have been removed in favor of events.
 - Automatic header offsetting has been removed.
+- The public `init()` method has been deprecated.
 
 
 

@@ -1,5 +1,5 @@
 /*!
- * gumshoe v4.0.1
+ * gumshoejs v5.0.0
  * A simple, framework-agnostic scrollspy script.
  * (c) 2019 Chris Ferdinandi
  * MIT License
@@ -403,9 +403,8 @@
 
 		/**
 		 * Initialize the current instantiation
-		 * @param  {Object} options User options and settings
 		 */
-		publicAPIs.init = function (options) {
+		var init = function () {
 
 			// Merge user options into defaults
 			settings = extend(defaults, options || {});
@@ -429,7 +428,7 @@
 		// Initialize and return the public APIs
 		//
 
-		publicAPIs.init(options);
+		init();
 		return publicAPIs;
 
 	};
