@@ -49,6 +49,14 @@ You can also use the [jsDelivr CDN](https://cdn.jsdelivr.net/gh/cferdinandi/gums
 <script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0.0/dist/gumshoe.polyfills.min.js"></script>
 ```
 
+**NPM**
+
+You can also use NPM (or your favorite package manager).
+
+```bash
+npm install gumshoejs
+```
+
 ### 2. Add the markup to your HTML.
 
 The only thing Gumshoe needs to work is a list of anchor links. They can be ordered or unordered, inline or unstyled, or even nested.
