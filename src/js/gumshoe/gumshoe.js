@@ -126,15 +126,52 @@
 	};
 
 	/**
-	 * Determine if an element is in the viewport
+	 * Get the document element's height
+	 * @private
+	 * @returns {Number}
+	 */
+	var getDocumentHeight = function () {
+		return Math.max(
+			document.body.scrollHeight, document.documentElement.scrollHeight,
+			document.body.offsetHeight, document.documentElement.offsetHeight,
+			document.body.clientHeight, document.documentElement.clientHeight
+		);
+	};
+
+	/**
+	 * Determine if an element is in view
 	 * @param  {Node}    elem     The element
 	 * @param  {Object}  settings The settings for this instantiation
+	 * @param  {Boolean} bottom   If true, check if element is above bottom of viewport instead
 	 * @return {Boolean}          Returns true if element is in the viewport
 	 */
-	var isInViewport = function (elem, settings) {
+	var isInView = function (elem, settings, bottom) {
 		var bounds = elem.getBoundingClientRect();
 		var offset = getOffset(settings);
-		return parseInt(bounds.top, 10) <= offset && parseInt(bounds.bottom, 10) > offset;
+		if (bottom) {
+			return parseInt(bounds.bottom, 10) < (window.innerHeight || document.documentElement.clientHeight);
+		}
+		return parseInt(bounds.top, 10) <= offset;
+	};
+
+	/**
+	 * Check if at the bottom of the viewport
+	 * @return {Boolean} If true, page is at the bottom of the viewport
+	 */
+	var isAtBottom = function () {
+		if (window.innerHeight + window.pageYOffset >= getDocumentHeight()) return true;
+		return false;
+	};
+
+	/**
+	 * Check if the last item should be used (even if not at the top of the page)
+	 * @param  {Object} item     The last item
+	 * @param  {Object} settings The settings for this instantiation
+	 * @return {Boolean}         If true, use the last item
+	 */
+	var useLastItem = function (item, settings) {
+		if (isAtBottom() && isInView(item.content, settings, true)) return true;
+		return false;
 	};
 
 	/**
@@ -144,8 +181,10 @@
 	 * @return {Object}          The content area and matching navigation link
 	 */
 	var getActive = function (contents, settings) {
+		var last = contents[contents.length-1];
+		if (useLastItem(last, settings)) return last;
 		for (var i = contents.length - 1; i >= 0; i--) {
-			if (isInViewport(contents[i].content, settings)) return contents[i];
+			if (isInView(contents[i].content, settings)) return contents[i];
 		}
 	};
 
