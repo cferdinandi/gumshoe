@@ -414,7 +414,7 @@
 
 			// Undo DOM changes
 			if (current) {
-				deactivate(current);
+				deactivate(current, settings);
 			}
 
 			// Remove event listeners
