@@ -87,7 +87,7 @@ Gumshoe adds the `.active` class to the list item (`<li></li>`) and content for 
 Add styles to your CSS as desired. And that's it, you're done. Nice work!
 
 ```css
-#my-awesome-nav a.active {
+#my-awesome-nav li.active a {
 	font-weight: bold;
 }
 ```
