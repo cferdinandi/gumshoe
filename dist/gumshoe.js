@@ -227,7 +227,7 @@
 	 */
 	var deactivate = function (items, settings) {
 
-		// Make sure their are items to deactivate
+		// Make sure there are items to deactivate
 		if (!items) return;
 
 		// Get the parent list item
@@ -280,7 +280,7 @@
 	 */
 	var activate = function (items, settings) {
 
-		// Make sure their are items to activate
+		// Make sure there are items to activate
 		if (!items) return;
 
 		// Get the parent list item
