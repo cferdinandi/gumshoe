@@ -1,5 +1,5 @@
 /*!
- * gumshoejs v5.1.1
+ * gumshoejs v5.1.2
  * A simple, framework-agnostic scrollspy script.
  * (c) 2019 Chris Ferdinandi
  * MIT License
@@ -245,7 +245,7 @@ if (!Element.prototype.closest) {
 	var deactivateNested = function (nav, settings) {
 
 		// If nesting isn't activated, bail
-		if (!settings.nested) return;
+		if (!settings.nested || !nav.parentNode) return;
 
 		// Get the parent navigation
 		var li = nav.parentNode.closest('li');

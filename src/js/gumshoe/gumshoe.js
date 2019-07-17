@@ -198,7 +198,7 @@
 	var deactivateNested = function (nav, settings) {
 
 		// If nesting isn't activated, bail
-		if (!settings.nested) return;
+		if (!settings.nested || !nav.parentNode) return;
 
 		// Get the parent navigation
 		var li = nav.parentNode.closest('li');
