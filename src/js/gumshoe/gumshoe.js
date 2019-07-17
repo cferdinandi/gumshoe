@@ -201,7 +201,7 @@
 		if (!settings.nested) return;
 
 		// Get the parent navigation
-		var li = nav.parentNode.closest('li');
+		var li = nav.parentNode && nav.parentNode.closest('li');
 		if (!li) return;
 
 		// Remove the active class
