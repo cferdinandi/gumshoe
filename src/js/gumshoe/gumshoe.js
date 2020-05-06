@@ -31,7 +31,11 @@
 		reflow: false,
 
 		// Event support
-		events: true
+		events: true,
+
+		// Selector for parent element that will receive active class.
+		// Set to false if active should be set on the link.
+		activeNavElement: 'li'
 
 	};
 
@@ -191,6 +195,16 @@
 	};
 
 	/**
+	 * Return the element for the active class toggle
+	 * @param {Node} nav        The navigation element
+	 * @param {Object} settings The settings for this instantiation
+	 * @return {Node}           The element to receive 'active' class
+	 */
+	var getNodeToActivate = function (nav, settings) {
+		return settings.activeNavElement ? nav.closest(settings.activeNavElement) : nav;
+	}
+
+	/**
 	 * Deactivate parent navs in a nested navigation
 	 * @param  {Node}   nav      The starting navigation element
 	 * @param  {Object} settings The settings for this instantiation
@@ -201,14 +215,14 @@
 		if (!settings.nested || !nav.parentNode) return;
 
 		// Get the parent navigation
-		var li = nav.parentNode.closest('li');
-		if (!li) return;
+		var activeEl = getNodeToActivate(nav.parentNode, settings);
+		if (!activeEl) return;
 
 		// Remove the active class
-		li.classList.remove(settings.nestedClass);
+		activeEl.classList.remove(settings.nestedClass);
 
 		// Apply recursively to any parent navigation elements
-		deactivateNested(li, settings);
+		deactivateNested(activeEl, settings);
 
 	};
 
@@ -223,18 +237,18 @@
 		if (!items) return;
 
 		// Get the parent list item
-		var li = items.nav.closest('li');
-		if (!li) return;
+		var activeEl = getNodeToActivate(items.nav, settings);
+		if (!activeEl) return;
 
 		// Remove the active class from the nav and content
-		li.classList.remove(settings.navClass);
+		activeEl.classList.remove(settings.navClass);
 		items.content.classList.remove(settings.contentClass);
 
 		// Deactivate any parent navs in a nested navigation
-		deactivateNested(li, settings);
+		deactivateNested(activeEl, settings);
 
 		// Emit a custom event
-		emitEvent('gumshoeDeactivate', li, {
+		emitEvent('gumshoeDeactivate', activeEl, {
 			link: items.nav,
 			content: items.content,
 			settings: settings
@@ -254,14 +268,14 @@
 		if (!settings.nested) return;
 
 		// Get the parent navigation
-		var li = nav.parentNode.closest('li');
-		if (!li) return;
+		var activeEl = getNodeToActivate(nav.parentNode, settings);
+		if (!activeEl) return;
 
 		// Add the active class
-		li.classList.add(settings.nestedClass);
+		activeEl.classList.add(settings.nestedClass);
 
 		// Apply recursively to any parent navigation elements
-		activateNested(li, settings);
+		activateNested(activeEl, settings);
 
 	};
 
@@ -276,18 +290,18 @@
 		if (!items) return;
 
 		// Get the parent list item
-		var li = items.nav.closest('li');
-		if (!li) return;
+		var activeEl = getNodeToActivate(items.nav, settings);
+		if (!activeEl) return;
 
 		// Add the active class to the nav and content
-		li.classList.add(settings.navClass);
+		activeEl.classList.add(settings.navClass);
 		items.content.classList.add(settings.contentClass);
 
 		// Activate any parent navs in a nested navigation
-		activateNested(li, settings);
+		activateNested(activeEl, settings);
 
 		// Emit a custom event
-		emitEvent('gumshoeActivate', li, {
+		emitEvent('gumshoeActivate', activeEl, {
 			link: items.nav,
 			content: items.content,
 			settings: settings
