@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title>Gumshoe</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<style type="text/css">
+			html {
+				overflow-y: auto;
+				scroll-behavior: smooth;
+			}
+
+			/*  Sets body width */
+			.container {
+				max-width: 90em;
+				width: 88%;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+			/**
+			 * Grid
+			 */
+			.grid {
+				display: grid;
+				grid-gap: 2em;
+				grid-template-columns: 30% 70%;
+			}
+
+			#my-awesome-nav {
+				position: fixed;
+        padding: 1em;
+			}
+
+      nav a {
+        display: block;
+        padding: 2px 1em;
+      }
+
+			nav a.active {
+				background-color: black;
+			}
+
+			nav a.active {
+				color: white;
+			}
+
+			/**
+			 * Sections
+			 */
+			.section {
+				color: #ffffff;
+				height: 95vh;
+				margin: 0;
+				padding: 2em;
+			}
+
+			.section-small {
+				height: 50vh;
+			}
+
+			.eenie {
+				background-color: #0088cc;
+			}
+
+			.meenie {
+				background-color: rebeccapurple;
+			}
+
+			.miney {
+				background-color: #272727;
+			}
+
+			.mo {
+				background-color: #f42b37;
+			}
+
+			.tiger {
+				background-color: #e5e5e5;
+				color: #000000;
+			}
+		</style>
+	</head>
+
+	<body id="top">
+
+		<div class="container">
+			<div class="grid">
+        <aside>
+          <nav id="my-awesome-nav">
+              <a href="#eenie">Eenie</a>
+              <a href="#meenie">Meenie</a>
+              <a href="#miney">Miney</a>
+              <a href="#mo">Mo</a>
+              <a href="#tiger">Tiger</a>
+          </nav>
+        </aside>
+				<main>
+					<div class="section eenie">
+						<h2 id="eenie">Eenie...</h2>
+					</div>
+
+					<div class="section meenie">
+						<h2 id="meenie">Meenie...</h2>
+					</div>
+
+					<div class="section miney">
+						<h2 id="miney">Miney...</h2>
+					</div>
+
+					<div class="section mo">
+						<h2 id="mo">Mo...</h2>
+					</div>
+
+					<div class="section section-small tiger">
+						<h2 id="tiger">Tiger...</h2>
+					</div>
+
+					<p><a data-scroll href="#top">Back to the top</a></p>
+				</main>
+			</div>
+		</aside>
+
+		<!-- Javascript -->
+		<script src="dist/gumshoe.js"></script>
+		<script>
+			var spy = new Gumshoe('#my-awesome-nav a', { activeNavElement: false });
+		</script>
+
+
+	</body>
+</html>

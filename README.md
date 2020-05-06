@@ -186,6 +186,9 @@ var spy = new Gumshoe('#my-awesome-nav a', {
 	nested: false, // if true, add classes to parents of active link
 	nestedClass: 'active', // applied to the parent items
 
+	// Element to receive 'active class'. If false then uses the selector supplied to the constructor.
+	activeNavElement: false, // false or a css selector
+
 	// Offset & reflow
 	offset: 0, // how far from the top of the page to activate a content area
 	reflow: false, // if true, listen for reflows
