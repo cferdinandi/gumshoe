@@ -191,7 +191,10 @@ var spy = new Gumshoe('#my-awesome-nav a', {
 	reflow: false, // if true, listen for reflows
 
 	// Event support
-	events: true // if true, emit custom events
+	events: true, // if true, emit custom events
+
+	// Event support
+	useLast: true // if true, the last page item will be set as 'active' when scrolled to bottom
 
 });
 ```
