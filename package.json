@@ -10,7 +10,7 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "http://github.com/cferdinandi/gumshoe"
+		"url": "https://github.com/cferdinandi/gumshoe"
 	},
 	"devDependencies": {
 		"gulp": "4.0.0",
